@@ -1,8 +1,8 @@
 use anyhow::{Context, Result};
 use colored::Colorize;
 use std::fs;
-use std::path::{Path, PathBuf};
 use std::io::Read;
+use std::path::{Path, PathBuf};
 
 use crate::core;
 use crate::utils::fs as fs_utils;
@@ -21,7 +21,9 @@ pub fn run(target_dir: Option<&PathBuf>, force: bool) -> Result<String> {
     // Find the target project's src directory
     let src_dir = root_dir.join("src");
     if !src_dir.exists() {
-        return Err(anyhow::anyhow!("Could not find the src directory. Are you in a Rust project?"));
+        return Err(anyhow::anyhow!(
+            "Could not find the src directory. Are you in a Rust project?"
+        ));
     }
 
     // Create the stripe directory if it doesn't exist
@@ -61,16 +63,16 @@ pub fn run(target_dir: Option<&PathBuf>, force: bool) -> Result<String> {
 /// Write all core SDK files to the project
 fn write_core_files(stripe_dir: &Path, client_dir: &Path, force: bool) -> Result<()> {
     // Create main files
-    
+
     // Create lib.rs - Main library file
     let lib_rs_content = core::generate_lib_rs()?;
     fs_utils::write_file(
-        &stripe_dir.join("lib.rs"),
+        &stripe_dir.join("mod.rs"),
         &lib_rs_content,
         force,
-        "stripe/lib.rs",
+        "stripe/mod.rs",
     )?;
-    
+
     // Create error.rs - Error handling
     let error_rs_content = core::generate_error_rs()?;
     fs_utils::write_file(
@@ -79,7 +81,7 @@ fn write_core_files(stripe_dir: &Path, client_dir: &Path, force: bool) -> Result
         force,
         "stripe/error.rs",
     )?;
-    
+
     // Create ids.rs - ID types
     let ids_rs_content = core::generate_ids_rs()?;
     fs_utils::write_file(
@@ -88,7 +90,7 @@ fn write_core_files(stripe_dir: &Path, client_dir: &Path, force: bool) -> Result
         force,
         "stripe/ids.rs",
     )?;
-    
+
     // Create params.rs - Parameter types
     let params_rs_content = core::generate_params_rs()?;
     fs_utils::write_file(
@@ -97,7 +99,7 @@ fn write_core_files(stripe_dir: &Path, client_dir: &Path, force: bool) -> Result
         force,
         "stripe/params.rs",
     )?;
-    
+
     // Create resources.rs - Resource definitions
     let resources_rs_content = core::generate_resources_rs()?;
     fs_utils::write_file(
@@ -106,9 +108,9 @@ fn write_core_files(stripe_dir: &Path, client_dir: &Path, force: bool) -> Result
         force,
         "stripe/resources.rs",
     )?;
-    
+
     // Create client files
-    
+
     // Create client/mod.rs - Client module
     let client_mod_rs_content = core::generate_client_mod_rs()?;
     fs_utils::write_file(
@@ -117,7 +119,7 @@ fn write_core_files(stripe_dir: &Path, client_dir: &Path, force: bool) -> Result
         force,
         "stripe/client/mod.rs",
     )?;
-    
+
     // Create client/request_strategy.rs - Request strategy
     let request_strategy_rs_content = core::generate_client_request_strategy_rs()?;
     fs_utils::write_file(
@@ -126,7 +128,7 @@ fn write_core_files(stripe_dir: &Path, client_dir: &Path, force: bool) -> Result
         force,
         "stripe/client/request_strategy.rs",
     )?;
-    
+
     // Create client/stripe.rs - Stripe client
     let stripe_rs_content = core::generate_client_stripe_rs()?;
     fs_utils::write_file(
@@ -135,7 +137,7 @@ fn write_core_files(stripe_dir: &Path, client_dir: &Path, force: bool) -> Result
         force,
         "stripe/client/stripe.rs",
     )?;
-    
+
     // Create client/tokio.rs - Tokio client
     let tokio_rs_content = core::generate_client_tokio_rs()?;
     fs_utils::write_file(
@@ -152,7 +154,9 @@ fn write_core_files(stripe_dir: &Path, client_dir: &Path, force: bool) -> Result
 fn add_dependencies(root_dir: &Path) -> Result<()> {
     let cargo_toml_path = root_dir.join("Cargo.toml");
     if !cargo_toml_path.exists() {
-        return Err(anyhow::anyhow!("Could not find Cargo.toml. Are you in a Rust project?"));
+        return Err(anyhow::anyhow!(
+            "Could not find Cargo.toml. Are you in a Rust project?"
+        ));
     }
 
     // Read the current Cargo.toml
@@ -160,8 +164,8 @@ fn add_dependencies(root_dir: &Path) -> Result<()> {
     fs::File::open(&cargo_toml_path)?.read_to_string(&mut cargo_toml_content)?;
 
     // Parse the current Cargo.toml
-    let mut cargo_toml: toml::Value = toml::from_str(&cargo_toml_content)
-        .context("Failed to parse Cargo.toml")?;
+    let mut cargo_toml: toml::Value =
+        toml::from_str(&cargo_toml_content).context("Failed to parse Cargo.toml")?;
 
     // Define the required dependencies
     let dependencies = vec![
@@ -170,6 +174,8 @@ fn add_dependencies(root_dir: &Path) -> Result<()> {
         ("serde", "1.0", Some(vec!["derive"])),
         ("serde_json", "1.0", None),
         ("thiserror", "1.0", None),
+        ("smart-default", "0.7", None),
+        ("http-types", "2.12", None),
     ];
 
     // Get or create dependencies table
@@ -194,21 +200,26 @@ fn add_dependencies(root_dir: &Path) -> Result<()> {
             // Add the dependency
             if let Some(feature_list) = features {
                 let mut dep_table = toml::value::Table::new();
-                dep_table.insert("version".to_string(), toml::Value::String(version.to_string()));
-                
+                dep_table.insert(
+                    "version".to_string(),
+                    toml::Value::String(version.to_string()),
+                );
+
                 // Create features array
-                let features_array = feature_list.into_iter()
+                let features_array = feature_list
+                    .into_iter()
                     .map(|f| toml::Value::String(f.to_string()))
                     .collect::<Vec<_>>();
-                
+
                 dep_table.insert("features".to_string(), toml::Value::Array(features_array));
-                
+
                 dependencies_table.insert(name.to_string(), toml::Value::Table(dep_table));
             } else {
                 // Simple version dependency
-                dependencies_table.insert(name.to_string(), toml::Value::String(version.to_string()));
+                dependencies_table
+                    .insert(name.to_string(), toml::Value::String(version.to_string()));
             }
-            
+
             added_count += 1;
             println!("{} Added dependency: {}", "✓".green(), name);
         }
@@ -216,15 +227,21 @@ fn add_dependencies(root_dir: &Path) -> Result<()> {
 
     // Write the updated Cargo.toml
     if added_count > 0 {
-        let updated_content = toml::to_string(&cargo_toml)
-            .context("Failed to serialize updated Cargo.toml")?;
-        
+        let updated_content =
+            toml::to_string(&cargo_toml).context("Failed to serialize updated Cargo.toml")?;
+
         fs::write(&cargo_toml_path, updated_content)
             .context("Failed to write updated Cargo.toml")?;
-        
-        println!("{} Updated Cargo.toml with required dependencies", "✓".green());
+
+        println!(
+            "{} Updated Cargo.toml with required dependencies",
+            "✓".green()
+        );
     } else {
-        println!("{} All required dependencies already present in Cargo.toml", "✓".green());
+        println!(
+            "{} All required dependencies already present in Cargo.toml",
+            "✓".green()
+        );
     }
 
     Ok(())
