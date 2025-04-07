@@ -1,19 +1,24 @@
 use anyhow::{Context, Result};
 use colored::Colorize;
 use std::fs;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use crate::core;
 use crate::utils::fs as fs_utils;
 
 /// Run the init command to set up the base Stripe SDK files
-pub fn run(force: bool) -> Result<String> {
+pub fn run(target_dir: Option<&PathBuf>, force: bool) -> Result<String> {
+    // If target directory is provided, ensure it exists and contains a Rust project
+    if let Some(dir) = target_dir {
+        fs_utils::ensure_project_exists(dir)?;
+    }
+
     // Find the target project's src directory
-    let target_dir = fs_utils::find_src_directory()
+    let src_dir = fs_utils::find_src_directory(target_dir.map(Path::new))
         .context("Could not find the src directory. Are you in a Rust project?")?;
 
     // Create the stripe directory if it doesn't exist
-    let stripe_dir = target_dir.join("stripe");
+    let stripe_dir = src_dir.join("stripe");
     if !stripe_dir.exists() {
         fs::create_dir_all(&stripe_dir).context("Failed to create stripe directory")?;
         println!(

@@ -1,18 +1,18 @@
 use anyhow::{Context, Result, anyhow};
 use colored::Colorize;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use crate::components;
 use crate::utils::fs as fs_utils;
 
 /// Run the add command to add a Stripe API component
-pub fn run(component: &str, force: bool) -> Result<String> {
+pub fn run(component: &str, target_dir: Option<&PathBuf>, force: bool) -> Result<String> {
     // Find the target project's src directory
-    let target_dir = fs_utils::find_src_directory()
+    let src_dir = fs_utils::find_src_directory(target_dir.map(Path::new))
         .context("Could not find the src directory. Are you in a Rust project?")?;
 
     // Ensure the stripe directory exists
-    let stripe_dir = target_dir.join("stripe");
+    let stripe_dir = src_dir.join("stripe");
     if !stripe_dir.exists() {
         return Err(anyhow!(
             "Stripe SDK not initialized. Run 'cargo stripe init' first."
@@ -43,6 +43,8 @@ pub fn run(component: &str, force: bool) -> Result<String> {
 
     Ok(format!("Successfully added {} component", component))
 }
+
+// The update_mod_rs function remains unchanged
 
 /// Update the mod.rs file to include the new component
 fn update_mod_rs(stripe_dir: &Path, component: &str) -> Result<()> {
