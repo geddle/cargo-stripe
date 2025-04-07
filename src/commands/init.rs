@@ -153,22 +153,22 @@ fn write_core_files(
         "stripe/client/request_strategy.rs",
     )?;
 
-    // Create client/stripe.rs - Stripe client
-    let stripe_rs_content = core::generate_client_stripe_rs()?;
+    // Create client/stripe_client.rs - Stripe client
+    let stripe_rs_content = core::generate_client_stripe_client_rs()?;
     fs_utils::write_file(
-        &client_dir.join("stripe.rs"),
+        &client_dir.join("stripe_client.rs"),
         stripe_rs_content,
         force,
-        "stripe/client/stripe.rs",
+        "stripe/client/stripe_client.rs",
     )?;
 
-    // Create client/tokio.rs - Tokio client
-    let tokio_rs_content = core::generate_client_tokio_rs()?;
+    // Create client/http_client.rs - Http client
+    let httpclient_rs_content = core::generate_client_http_client_rs()?;
     fs_utils::write_file(
-        &client_dir.join("tokio.rs"),
-        tokio_rs_content,
+        &client_dir.join("http_client.rs"),
+        httpclient_rs_content,
         force,
-        "stripe/client/tokio.rs",
+        "stripe/client/http_client.rs",
     )?;
 
     Ok(())
@@ -200,7 +200,9 @@ fn add_dependencies(root_dir: &Path) -> Result<()> {
         ("thiserror", "1.0", None),
         ("smart-default", "0.7", None),
         ("http-types", "2.12", None),
+        ("http", "1.3", None),
         ("hyper", "1.6", None),
+        ("hyper-util", "0.1", None),
         ("smol_str", "0.3", None),
         ("futures-util", "0.3", None),
         ("hyper-rustls", "0.27", None),

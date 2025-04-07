@@ -62,12 +62,12 @@ pub fn generate_client_request_strategy_rs() -> Result<&'static str> {
     Ok(include_str!("templates/client/request_strategy.rs"))
 }
 
-/// Generate the content for client/stripe.rs
-pub fn generate_client_stripe_rs() -> Result<&'static str> {
-    Ok(include_str!("templates/client/stripe.rs"))
+/// Generate the content for client/stripe_client.rs
+pub fn generate_client_stripe_client_rs() -> Result<&'static str> {
+    Ok(include_str!("templates/client/stripe_client.rs"))
 }
 
-/// Generate the content for client/tokio.rs
-pub fn generate_client_tokio_rs() -> Result<&'static str> {
-    Ok(include_str!("templates/client/tokio.rs"))
+/// Generate the content for client/http_client.rs
+pub fn generate_client_http_client_rs() -> Result<&'static str> {
+    Ok(include_str!("templates/client/http_client.rs"))
 }
