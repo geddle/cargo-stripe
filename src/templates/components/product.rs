@@ -5,9 +5,9 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-use crate::client::Client;
-use crate::error::Result;
-use crate::types::{Id, List, Metadata, Timestamp};
+use crate::stripe::client::Client;
+use crate::stripe::error::Result;
+use crate::stripe::types::{Id, List, Metadata, Timestamp};
 
 /// A Stripe product object
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -177,7 +177,7 @@ impl Client {
 
         let status = response.status();
         if !status.is_success() {
-            let error: crate::error::ApiError = response.json().await?;
+            let error: crate::stripe::error::ApiError = response.json().await?;
             return Err(error.into());
         }
 
@@ -192,7 +192,7 @@ impl Client {
 
         let status = response.status();
         if !status.is_success() {
-            let error: crate::error::ApiError = response.json().await?;
+            let error: crate::stripe::error::ApiError = response.json().await?;
             return Err(error.into());
         }
 
@@ -211,7 +211,7 @@ impl Client {
 
         let status = response.status();
         if !status.is_success() {
-            let error: crate::error::ApiError = response.json().await?;
+            let error: crate::stripe::error::ApiError = response.json().await?;
             return Err(error.into());
         }
 
@@ -226,7 +226,7 @@ impl Client {
 
         let status = response.status();
         if !status.is_success() {
-            let error: crate::error::ApiError = response.json().await?;
+            let error: crate::stripe::error::ApiError = response.json().await?;
             return Err(error.into());
         }
 
@@ -258,7 +258,7 @@ impl Client {
 
         let status = response.status();
         if !status.is_success() {
-            let error: crate::error::ApiError = response.json().await?;
+            let error: crate::stripe::error::ApiError = response.json().await?;
             return Err(error.into());
         }
 

@@ -73,7 +73,7 @@ macro_rules! def_id {
             }
         }
 
-        impl crate::params::AsCursor for $struct_name {}
+        impl crate::stripe::params::AsCursor for $struct_name {}
 
         impl std::ops::Deref for $struct_name {
             type Target = str;
@@ -184,7 +184,7 @@ macro_rules! def_id {
             }
         }
 
-        impl crate::params::AsCursor for $struct_name {}
+        impl crate::stripe::params::AsCursor for $struct_name {}
 
         impl std::ops::Deref for $struct_name {
             type Target = str;
@@ -262,7 +262,7 @@ macro_rules! def_id {
             }
         }
 
-        impl crate::params::AsCursor for $enum_name {}
+        impl crate::stripe::params::AsCursor for $enum_name {}
 
         impl std::ops::Deref for $enum_name {
             type Target = str;
@@ -376,7 +376,7 @@ macro_rules! def_id {
             }
         }
 
-        impl crate::params::AsCursor for $enum_name {}
+        impl crate::stripe::params::AsCursor for $enum_name {}
 
         impl std::ops::Deref for $enum_name {
             type Target = str;

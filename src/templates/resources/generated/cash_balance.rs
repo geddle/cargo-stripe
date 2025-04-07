@@ -2,7 +2,7 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::params::{Object};
+use crate::stripe::params::{Object};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "cash_balance".

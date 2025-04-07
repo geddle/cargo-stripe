@@ -7,8 +7,8 @@ use hyper::{client::HttpConnector, Body};
 use serde::de::DeserializeOwned;
 use tokio::time::sleep;
 
-use crate::client::request_strategy::{Outcome, RequestStrategy};
-use crate::error::{ErrorResponse, StripeError};
+use crate::stripe::client::request_strategy::{Outcome, RequestStrategy};
+use crate::stripe::error::{ErrorResponse, StripeError};
 
 #[cfg(feature = "hyper-rustls-native")]
 mod connector {
@@ -200,8 +200,8 @@ mod tests {
 
     use super::convert_request;
     use super::TokioClient;
-    use crate::client::request_strategy::RequestStrategy;
-    use crate::StripeError;
+    use crate::stripe::client::request_strategy::RequestStrategy;
+    use crate::stripe::StripeError;
 
     const TEST_URL: &str = "https://api.stripe.com/v1/";
 

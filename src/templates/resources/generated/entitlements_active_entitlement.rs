@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{EntitlementsActiveEntitlementId};
-use crate::params::{Expandable, Object};
-use crate::resources::{EntitlementsFeature};
+use crate::stripe::ids::{EntitlementsActiveEntitlementId};
+use crate::stripe::params::{Expandable, Object};
+use crate::stripe::resources::{EntitlementsFeature};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "ActiveEntitlement".

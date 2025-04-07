@@ -2,7 +2,7 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::params::{Timestamp};
+use crate::stripe::params::{Timestamp};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "payment_method_details_card_present_offline".

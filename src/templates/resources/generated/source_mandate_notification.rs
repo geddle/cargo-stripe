@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{SourceMandateNotificationId};
-use crate::params::{Object, Timestamp};
-use crate::resources::{Source};
+use crate::stripe::ids::{SourceMandateNotificationId};
+use crate::stripe::params::{Object, Timestamp};
+use crate::stripe::resources::{Source};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "SourceMandateNotification".

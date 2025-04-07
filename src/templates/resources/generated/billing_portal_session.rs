@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{BillingPortalSessionId, CustomerId};
-use crate::params::{Expand, Expandable, Object, Timestamp};
-use crate::resources::{BillingPortalConfiguration};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{BillingPortalSessionId, CustomerId};
+use crate::stripe::params::{Expand, Expandable, Object, Timestamp};
+use crate::stripe::resources::{BillingPortalConfiguration};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "PortalSession".

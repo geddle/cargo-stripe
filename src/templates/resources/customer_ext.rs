@@ -1,9 +1,9 @@
 use serde::{Deserialize, Serialize};
 
-use crate::client::{Client, Response};
-use crate::ids::{BankAccountId, CardId, CustomerId, PaymentSourceId};
-use crate::params::{Deleted, Expand, List, SearchList};
-use crate::resources::{
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{BankAccountId, CardId, CustomerId, PaymentSourceId};
+use crate::stripe::params::{Deleted, Expand, List, SearchList};
+use crate::stripe::resources::{
     BankAccount, Customer, PaymentMethod, PaymentSource, PaymentSourceParams, Source,
 };
 

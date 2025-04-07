@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{TreasuryDebitReversalId};
-use crate::params::{Expandable, Metadata, Object, Timestamp};
-use crate::resources::{Currency, TreasuryTransaction};
+use crate::stripe::ids::{TreasuryDebitReversalId};
+use crate::stripe::params::{Expandable, Metadata, Object, Timestamp};
+use crate::stripe::resources::{Currency, TreasuryTransaction};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "TreasuryReceivedDebitsResourceDebitReversal".

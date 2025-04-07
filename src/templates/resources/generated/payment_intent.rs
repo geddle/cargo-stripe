@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{ConfirmationTokenId, CustomerId, MandateId, PaymentIntentId, PaymentMethodConfigurationId, PaymentMethodId};
-use crate::params::{Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
-use crate::resources::{Account, Address, ApiErrors, Application, Charge, Currency, Customer, LinkedAccountOptionsUsBankAccount, PaymentFlowsAmountDetailsClientResourceTip, PaymentFlowsPaymentIntentPresentmentDetails, PaymentIntentNextActionCashappHandleRedirectOrDisplayQrCode, PaymentIntentOffSession, PaymentMethod, PaymentMethodConfigBizPaymentMethodConfigurationDetails, PaymentMethodDetailsCardInstallmentsPlan, PaymentMethodOptionsCardPresentRouting, PaymentMethodOptionsCustomerBalanceEuBankAccount, PaymentMethodOptionsUsBankAccountMandateOptions, PaymentSource, Review, Shipping};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{ConfirmationTokenId, CustomerId, MandateId, PaymentIntentId, PaymentMethodConfigurationId, PaymentMethodId};
+use crate::stripe::params::{Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
+use crate::stripe::resources::{Account, Address, ApiErrors, Application, Charge, Currency, Customer, LinkedAccountOptionsUsBankAccount, PaymentFlowsAmountDetailsClientResourceTip, PaymentFlowsPaymentIntentPresentmentDetails, PaymentIntentNextActionCashappHandleRedirectOrDisplayQrCode, PaymentIntentOffSession, PaymentMethod, PaymentMethodConfigBizPaymentMethodConfigurationDetails, PaymentMethodDetailsCardInstallmentsPlan, PaymentMethodOptionsCardPresentRouting, PaymentMethodOptionsCustomerBalanceEuBankAccount, PaymentMethodOptionsUsBankAccountMandateOptions, PaymentSource, Review, Shipping};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "PaymentIntent".

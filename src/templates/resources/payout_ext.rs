@@ -1,9 +1,9 @@
 use serde::{Deserialize, Serialize};
 
-use crate::client::{Client, Response};
-use crate::ids::{PayoutDestinationId, PayoutId};
-use crate::params::Object;
-use crate::resources::{BankAccount, Card, Payout};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{PayoutDestinationId, PayoutId};
+use crate::stripe::params::Object;
+use crate::stripe::resources::{BankAccount, Card, Payout};
 
 impl Payout {
     /// Cancels the payout.

@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{BillingAlertId};
-use crate::params::{Expandable, Object};
-use crate::resources::{BillingMeter, Customer};
+use crate::stripe::ids::{BillingAlertId};
+use crate::stripe::params::{Expandable, Object};
+use crate::stripe::resources::{BillingMeter, Customer};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "ThresholdsResourceAlert".

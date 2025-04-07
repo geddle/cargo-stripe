@@ -1,9 +1,9 @@
 use serde::Serialize;
 
-use crate::client::{Client, Response};
-use crate::params::Expand;
-use crate::resources::SetupIntent;
-use crate::{PaymentMethodId, SetupIntentCancellationReason, SetupIntentId};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::params::Expand;
+use crate::stripe::resources::SetupIntent;
+use crate::stripe::{PaymentMethodId, SetupIntentCancellationReason, SetupIntentId};
 
 /// The set of parameters that can be used when confirming a setup_intent object.
 ///
@@ -20,11 +20,11 @@ pub struct ConfirmSetupIntent {
 
     /// When included, this hash creates a PaymentMethod that is set as the payment_method value in the SetupIntent.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub payment_method_data: Option<crate::UpdatePaymentIntentPaymentMethodData>,
+    pub payment_method_data: Option<crate::stripe::UpdatePaymentIntentPaymentMethodData>,
 
     /// Payment method-specific configuration for this SetupIntent.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub payment_method_options: Option<crate::UpdatePaymentIntentPaymentMethodOptions>,
+    pub payment_method_options: Option<crate::stripe::UpdatePaymentIntentPaymentMethodOptions>,
 
     /// The URL to redirect your customer back to after they authenticate on the payment method’s app or site.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -36,7 +36,7 @@ pub struct ConfirmSetupIntent {
 
 #[derive(Clone, Debug, Default, Serialize)]
 pub struct MandateData {
-    pub customer_acceptance: crate::CustomerAcceptance,
+    pub customer_acceptance: crate::stripe::CustomerAcceptance,
 }
 
 /// The set of parameters that can be used when canceling a setup_intent object.

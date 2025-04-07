@@ -1,9 +1,9 @@
 use serde::{Deserialize, Serialize};
 
-use crate::client::{Client, Response};
-use crate::ids::{AccountId, BankAccountId, CardId, ChargeId, SourceId, TokenId};
-use crate::params::{Object, SearchList};
-use crate::resources::{Charge, Rule};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{AccountId, BankAccountId, CardId, ChargeId, SourceId, TokenId};
+use crate::stripe::params::{Object, SearchList};
+use crate::stripe::resources::{Charge, Rule};
 
 /// The set of PaymentSource parameters that can be used to create a charge.
 ///

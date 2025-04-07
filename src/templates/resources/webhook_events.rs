@@ -9,8 +9,8 @@ use serde_json::Value;
 use sha2::Sha256;
 use smart_default::SmartDefault;
 
-use crate::error::WebhookError;
-use crate::resources::*;
+use crate::stripe::error::WebhookError;
+use crate::stripe::resources::*;
 
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq, Hash, SmartDefault)]
 pub enum EventType {
@@ -671,7 +671,7 @@ mod tests {
             .expect("Failed to construct event");
 
         assert_eq!(event.type_, super::EventType::InvoiceItemCreated);
-        assert_eq!(event.id, "evt_123".parse::<crate::EventId>().unwrap());
+        assert_eq!(event.id, "evt_123".parse::<crate::stripe::EventId>().unwrap());
         assert_eq!(event.account, "acct_123".parse().ok());
         assert_eq!(event.created, 1533204620);
     }

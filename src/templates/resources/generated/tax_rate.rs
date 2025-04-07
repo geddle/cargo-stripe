@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{TaxRateId};
-use crate::params::{Expand, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
-use crate::resources::{TaxRateFlatAmount};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{TaxRateId};
+use crate::stripe::params::{Expand, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
+use crate::stripe::resources::{TaxRateFlatAmount};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "TaxRate".

@@ -2,7 +2,7 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::resources::{PaymentIntent, PaymentMethod, PaymentSource, SetupIntent};
+use crate::stripe::resources::{PaymentIntent, PaymentMethod, PaymentSource, SetupIntent};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "APIErrors".

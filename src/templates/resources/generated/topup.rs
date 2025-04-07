@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{TopupId};
-use crate::params::{Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
-use crate::resources::{BalanceTransaction, Currency, Source};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{TopupId};
+use crate::stripe::params::{Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
+use crate::stripe::resources::{BalanceTransaction, Currency, Source};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "Topup".

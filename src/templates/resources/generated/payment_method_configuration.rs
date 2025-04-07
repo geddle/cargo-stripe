@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{PaymentMethodConfigurationId};
-use crate::params::{Expand, List, Object, Paginable};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{PaymentMethodConfigurationId};
+use crate::stripe::params::{Expand, List, Object, Paginable};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "PaymentMethodConfigResourcePaymentMethodConfiguration".

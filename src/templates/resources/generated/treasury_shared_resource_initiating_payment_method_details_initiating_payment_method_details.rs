@@ -2,7 +2,7 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::resources::{TreasurySharedResourceBillingDetails};
+use crate::stripe::resources::{TreasurySharedResourceBillingDetails};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "TreasurySharedResourceInitiatingPaymentMethodDetailsInitiatingPaymentMethodDetails".

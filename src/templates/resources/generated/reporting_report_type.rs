@@ -2,8 +2,8 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{ReportingReportTypeId};
-use crate::params::{Object, Timestamp};
+use crate::stripe::ids::{ReportingReportTypeId};
+use crate::stripe::params::{Object, Timestamp};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "reporting_report_type".

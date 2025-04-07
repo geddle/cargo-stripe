@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{TaxIdId};
-use crate::params::{Deleted, Expand, Expandable, List, Object, Paginable, Timestamp};
-use crate::resources::{Account, Application, Customer};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{TaxIdId};
+use crate::stripe::params::{Deleted, Expand, Expandable, List, Object, Paginable, Timestamp};
+use crate::stripe::resources::{Account, Application, Customer};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "tax_id".

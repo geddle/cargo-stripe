@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{FinancialConnectionsTransactionId};
-use crate::params::{Object, Timestamp};
-use crate::resources::{Currency};
+use crate::stripe::ids::{FinancialConnectionsTransactionId};
+use crate::stripe::params::{Object, Timestamp};
+use crate::stripe::resources::{Currency};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "BankConnectionsResourceTransaction".

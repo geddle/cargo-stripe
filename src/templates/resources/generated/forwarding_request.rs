@@ -2,8 +2,8 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{ForwardingRequestId};
-use crate::params::{Metadata, Object, Timestamp};
+use crate::stripe::ids::{ForwardingRequestId};
+use crate::stripe::params::{Metadata, Object, Timestamp};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "ForwardingRequest".

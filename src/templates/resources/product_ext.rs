@@ -1,7 +1,7 @@
 use serde::Serialize;
 
-use crate::params::SearchList;
-use crate::{Client, Product, Response};
+use crate::stripe::params::SearchList;
+use crate::stripe::{Client, Product, Response};
 
 #[derive(Clone, Debug, Default, Serialize)]
 pub struct ProductSearchParams<'a> {

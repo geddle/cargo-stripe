@@ -1,13 +1,10 @@
 mod request_strategy;
 mod stripe;
-
-mod base {
-    pub mod tokio;
-}
+mod tokio;
 
 pub(crate) mod config {
-    pub use super::base::tokio::{Response, TokioClient as BaseClient};
-    pub(crate) use super::base::tokio::{err, ok};
+    pub use super::tokio::{Response, TokioClient as BaseClient};
+    pub(crate) use super::tokio::{err, ok};
 }
 
 pub use config::BaseClient;

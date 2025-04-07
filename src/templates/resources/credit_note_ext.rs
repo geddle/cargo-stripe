@@ -1,6 +1,6 @@
-use crate::client::{Client, Response};
-use crate::ids::CreditNoteId;
-use crate::resources::CreditNote;
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::CreditNoteId;
+use crate::stripe::resources::CreditNote;
 
 impl CreditNote {
     /// Marks a credit note as void.

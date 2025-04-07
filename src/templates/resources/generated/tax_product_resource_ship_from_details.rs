@@ -2,7 +2,7 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::resources::{TaxProductResourcePostalAddress};
+use crate::stripe::resources::{TaxProductResourcePostalAddress};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "TaxProductResourceShipFromDetails".

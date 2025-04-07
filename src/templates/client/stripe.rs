@@ -1,7 +1,7 @@
 use http_types::{Body, Method, Request, Url};
 use serde::{de::DeserializeOwned, Serialize};
 
-use crate::{
+use crate::stripe::{
     client::{request_strategy::RequestStrategy, BaseClient, Response},
     config::err,
     generated::core::version::VERSION,
@@ -13,7 +13,7 @@ static USER_AGENT: &str = concat!("Stripe/v1 RustBindings/", env!("CARGO_PKG_VER
 
 #[derive(Clone)]
 pub struct Client {
-    client: crate::client::BaseClient,
+    client: crate::stripe::client::BaseClient,
     secret_key: String,
     headers: Headers,
     strategy: RequestStrategy,

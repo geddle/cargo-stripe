@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{InvoiceRenderingTemplateId};
-use crate::params::{Expand, List, Metadata, Object, Paginable, Timestamp};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{InvoiceRenderingTemplateId};
+use crate::stripe::params::{Expand, List, Metadata, Object, Paginable, Timestamp};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "InvoiceRenderingTemplate".

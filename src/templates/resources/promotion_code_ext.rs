@@ -1,5 +1,5 @@
-use crate::client::{Client, Response};
-use crate::resources::{Currency, PromotionCode};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::resources::{Currency, PromotionCode};
 
 #[derive(Copy, Clone, Debug, serde::Serialize)]
 pub struct CreatePromotionCode<'a> {

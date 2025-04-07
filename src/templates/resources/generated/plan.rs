@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{PlanId};
-use crate::params::{Deleted, Expand, Expandable, IdOrCreate, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
-use crate::resources::{CreateProduct, Currency, Product};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{PlanId};
+use crate::stripe::params::{Deleted, Expand, Expandable, IdOrCreate, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
+use crate::stripe::resources::{CreateProduct, Currency, Product};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "Plan".

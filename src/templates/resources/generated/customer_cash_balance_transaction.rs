@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{CustomerCashBalanceTransactionId};
-use crate::params::{Expandable, Object, Timestamp};
-use crate::resources::{BalanceTransaction, Currency, Customer, PaymentIntent, Refund};
+use crate::stripe::ids::{CustomerCashBalanceTransactionId};
+use crate::stripe::params::{Expandable, Object, Timestamp};
+use crate::stripe::resources::{BalanceTransaction, Currency, Customer, PaymentIntent, Refund};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "CustomerCashBalanceTransaction".

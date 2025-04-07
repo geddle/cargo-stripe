@@ -2,8 +2,8 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{ClimateSupplierId};
-use crate::params::{Object};
+use crate::stripe::ids::{ClimateSupplierId};
+use crate::stripe::params::{Object};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "ClimateRemovalsSuppliers".

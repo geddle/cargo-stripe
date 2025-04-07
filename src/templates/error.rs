@@ -3,7 +3,7 @@ use std::num::ParseIntError;
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
-use crate::params::to_snakecase;
+use super::params::to_snakecase;
 
 /// An error encountered when communicating with the Stripe API.
 #[derive(Debug, Error)]

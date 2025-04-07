@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{CustomerId, InvoiceId, SubscriptionId};
-use crate::params::{CurrencyMap, Deleted, Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
-use crate::resources::{Account, Address, ApiErrors, Application, BillingCreditBalanceTransaction, ConnectAccountReference, Currency, Customer, Discount, InvoiceLineItem, InvoicePayment, InvoicePaymentMethodOptionsAcssDebit, InvoicePaymentMethodOptionsBancontact, InvoicePaymentMethodOptionsCustomerBalance, InvoicePaymentMethodOptionsKonbini, InvoicePaymentMethodOptionsSepaDebit, InvoicePaymentMethodOptionsUsBankAccount, InvoicesResourceShippingCost, PaymentMethod, PaymentSource, Shipping, Subscription, TaxId, TaxRate, TestHelpersTestClock};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{CustomerId, InvoiceId, SubscriptionId};
+use crate::stripe::params::{CurrencyMap, Deleted, Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
+use crate::stripe::resources::{Account, Address, ApiErrors, Application, BillingCreditBalanceTransaction, ConnectAccountReference, Currency, Customer, Discount, InvoiceLineItem, InvoicePayment, InvoicePaymentMethodOptionsAcssDebit, InvoicePaymentMethodOptionsBancontact, InvoicePaymentMethodOptionsCustomerBalance, InvoicePaymentMethodOptionsKonbini, InvoicePaymentMethodOptionsSepaDebit, InvoicePaymentMethodOptionsUsBankAccount, InvoicesResourceShippingCost, PaymentMethod, PaymentSource, Shipping, Subscription, TaxId, TaxRate, TestHelpersTestClock};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "Invoice".

@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{RadarEarlyFraudWarningId};
-use crate::params::{Expandable, Object, Timestamp};
-use crate::resources::{Charge, PaymentIntent};
+use crate::stripe::ids::{RadarEarlyFraudWarningId};
+use crate::stripe::params::{Expandable, Object, Timestamp};
+use crate::stripe::resources::{Charge, PaymentIntent};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "RadarEarlyFraudWarning".

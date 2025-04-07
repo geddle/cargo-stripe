@@ -1,8 +1,8 @@
 use serde::{Deserialize, Serialize};
 
-use crate::client::{Client, Response};
-use crate::ids::{CustomerId, PaymentMethodId};
-use crate::resources::PaymentMethod;
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{CustomerId, PaymentMethodId};
+use crate::stripe::resources::PaymentMethod;
 
 /// The parameters for `PaymentMethod::attach`
 ///

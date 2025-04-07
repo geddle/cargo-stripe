@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{ConfirmationTokenId, CustomerId, PaymentMethodConfigurationId, PaymentMethodId, SetupIntentId};
-use crate::params::{Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
-use crate::resources::{Account, ApiErrors, Application, Currency, Customer, LinkedAccountOptionsUsBankAccount, Mandate, PaymentIntentNextActionCashappHandleRedirectOrDisplayQrCode, PaymentMethod, PaymentMethodConfigBizPaymentMethodConfigurationDetails, PaymentMethodOptionsUsBankAccountMandateOptions, SetupAttempt};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{ConfirmationTokenId, CustomerId, PaymentMethodConfigurationId, PaymentMethodId, SetupIntentId};
+use crate::stripe::params::{Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
+use crate::stripe::resources::{Account, ApiErrors, Application, Currency, Customer, LinkedAccountOptionsUsBankAccount, Mandate, PaymentIntentNextActionCashappHandleRedirectOrDisplayQrCode, PaymentMethod, PaymentMethodConfigBizPaymentMethodConfigurationDetails, PaymentMethodOptionsUsBankAccountMandateOptions, SetupAttempt};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "SetupIntent".

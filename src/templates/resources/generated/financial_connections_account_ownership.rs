@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{FinancialConnectionsAccountOwnershipId};
-use crate::params::{List, Object, Timestamp};
-use crate::resources::{FinancialConnectionsAccountOwner};
+use crate::stripe::ids::{FinancialConnectionsAccountOwnershipId};
+use crate::stripe::params::{List, Object, Timestamp};
+use crate::stripe::resources::{FinancialConnectionsAccountOwner};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "BankConnectionsResourceOwnership".

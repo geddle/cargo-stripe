@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::{Client, Response, SubscriptionItemId, Timestamp, UsageRecord};
+use crate::stripe::{Client, Response, SubscriptionItemId, Timestamp, UsageRecord};
 
 impl UsageRecord {
     pub fn create(

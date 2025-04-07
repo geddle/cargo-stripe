@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{IdentityVerificationReportId};
-use crate::params::{Object, Timestamp};
-use crate::resources::{Address};
+use crate::stripe::ids::{IdentityVerificationReportId};
+use crate::stripe::params::{Object, Timestamp};
+use crate::stripe::resources::{Address};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "GelatoVerificationReport".

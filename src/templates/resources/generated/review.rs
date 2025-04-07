@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{ReviewId};
-use crate::params::{Expand, Expandable, List, Object, Paginable, RangeQuery, Timestamp};
-use crate::resources::{Charge, PaymentIntent, ReviewReason};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{ReviewId};
+use crate::stripe::params::{Expand, Expandable, List, Object, Paginable, RangeQuery, Timestamp};
+use crate::stripe::resources::{Charge, PaymentIntent, ReviewReason};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "RadarReview".

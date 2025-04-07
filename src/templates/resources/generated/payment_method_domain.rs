@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{PaymentMethodDomainId};
-use crate::params::{Expand, List, Object, Paginable, Timestamp};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{PaymentMethodDomainId};
+use crate::stripe::params::{Expand, List, Object, Paginable, Timestamp};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "PaymentMethodDomainResourcePaymentMethodDomain".

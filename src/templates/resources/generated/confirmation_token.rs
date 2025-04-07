@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{ConfirmationTokenId};
-use crate::params::{Expand, Expandable, Object, Timestamp};
-use crate::resources::{Address, BillingDetails, CardDetails, CardPresent, Customer, PaymentFlowsPrivatePaymentMethodsAlipay, PaymentMethodAcssDebit, PaymentMethodAffirm, PaymentMethodAfterpayClearpay, PaymentMethodAlma, PaymentMethodAmazonPay, PaymentMethodAuBecsDebit, PaymentMethodBacsDebit, PaymentMethodBancontact, PaymentMethodBillie, PaymentMethodBlik, PaymentMethodBoleto, PaymentMethodCashapp, PaymentMethodCustomerBalance, PaymentMethodEps, PaymentMethodFpx, PaymentMethodGiropay, PaymentMethodGrabpay, PaymentMethodIdeal, PaymentMethodInteracPresent, PaymentMethodKakaoPay, PaymentMethodKlarna, PaymentMethodKonbini, PaymentMethodKrCard, PaymentMethodLink, PaymentMethodMobilepay, PaymentMethodMultibanco, PaymentMethodNaverPay, PaymentMethodNzBankAccount, PaymentMethodOxxo, PaymentMethodP24, PaymentMethodPayByBank, PaymentMethodPayco, PaymentMethodPaynow, PaymentMethodPaypal, PaymentMethodPix, PaymentMethodPromptpay, PaymentMethodRevolutPay, PaymentMethodSamsungPay, PaymentMethodSatispay, PaymentMethodSepaDebit, PaymentMethodSofort, PaymentMethodSwish, PaymentMethodTwint, PaymentMethodUsBankAccount, PaymentMethodWechatPay, PaymentMethodZip};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{ConfirmationTokenId};
+use crate::stripe::params::{Expand, Expandable, Object, Timestamp};
+use crate::stripe::resources::{Address, BillingDetails, CardDetails, CardPresent, Customer, PaymentFlowsPrivatePaymentMethodsAlipay, PaymentMethodAcssDebit, PaymentMethodAffirm, PaymentMethodAfterpayClearpay, PaymentMethodAlma, PaymentMethodAmazonPay, PaymentMethodAuBecsDebit, PaymentMethodBacsDebit, PaymentMethodBancontact, PaymentMethodBillie, PaymentMethodBlik, PaymentMethodBoleto, PaymentMethodCashapp, PaymentMethodCustomerBalance, PaymentMethodEps, PaymentMethodFpx, PaymentMethodGiropay, PaymentMethodGrabpay, PaymentMethodIdeal, PaymentMethodInteracPresent, PaymentMethodKakaoPay, PaymentMethodKlarna, PaymentMethodKonbini, PaymentMethodKrCard, PaymentMethodLink, PaymentMethodMobilepay, PaymentMethodMultibanco, PaymentMethodNaverPay, PaymentMethodNzBankAccount, PaymentMethodOxxo, PaymentMethodP24, PaymentMethodPayByBank, PaymentMethodPayco, PaymentMethodPaynow, PaymentMethodPaypal, PaymentMethodPix, PaymentMethodPromptpay, PaymentMethodRevolutPay, PaymentMethodSamsungPay, PaymentMethodSatispay, PaymentMethodSepaDebit, PaymentMethodSofort, PaymentMethodSwish, PaymentMethodTwint, PaymentMethodUsBankAccount, PaymentMethodWechatPay, PaymentMethodZip};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "ConfirmationTokensResourceConfirmationToken".

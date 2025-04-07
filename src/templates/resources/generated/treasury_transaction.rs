@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{TreasuryTransactionId};
-use crate::params::{List, Object, Timestamp};
-use crate::resources::{Currency, TreasuryTransactionEntry, TreasuryTransactionsResourceBalanceImpact, TreasuryTransactionsResourceFlowDetails};
+use crate::stripe::ids::{TreasuryTransactionId};
+use crate::stripe::params::{List, Object, Timestamp};
+use crate::stripe::resources::{Currency, TreasuryTransactionEntry, TreasuryTransactionsResourceBalanceImpact, TreasuryTransactionsResourceFlowDetails};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "TreasuryTransactionsResourceTransaction".

@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{BillingCreditBalanceTransactionId};
-use crate::params::{Expandable, Object, Timestamp};
-use crate::resources::{BillingCreditGrant, BillingCreditGrantsResourceAmount, Invoice, TestHelpersTestClock};
+use crate::stripe::ids::{BillingCreditBalanceTransactionId};
+use crate::stripe::params::{Expandable, Object, Timestamp};
+use crate::stripe::resources::{BillingCreditGrant, BillingCreditGrantsResourceAmount, Invoice, TestHelpersTestClock};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "CreditBalanceTransaction".

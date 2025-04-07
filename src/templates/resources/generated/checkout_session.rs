@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{CheckoutSessionId, CustomerId, PaymentIntentId, PaymentLinkId, PaymentMethodConfigurationId, SubscriptionId};
-use crate::params::{CurrencyMap, Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
-use crate::resources::{Address, CheckoutSessionItem, ConnectAccountReference, Coupon, Currency, Customer, Discount, Invoice, InvoiceSettingCheckoutRenderingOptions, LinkedAccountOptionsUsBankAccount, PaymentFlowsPaymentIntentPresentmentDetails, PaymentIntent, PaymentLink, PaymentMethodConfigBizPaymentMethodConfigurationDetails, PaymentMethodOptionsCustomerBalanceEuBankAccount, PromotionCode, SetupIntent, ShippingRate, Subscription, TaxId, TaxRate};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{CheckoutSessionId, CustomerId, PaymentIntentId, PaymentLinkId, PaymentMethodConfigurationId, SubscriptionId};
+use crate::stripe::params::{CurrencyMap, Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
+use crate::stripe::resources::{Address, CheckoutSessionItem, ConnectAccountReference, Coupon, Currency, Customer, Discount, Invoice, InvoiceSettingCheckoutRenderingOptions, LinkedAccountOptionsUsBankAccount, PaymentFlowsPaymentIntentPresentmentDetails, PaymentIntent, PaymentLink, PaymentMethodConfigBizPaymentMethodConfigurationDetails, PaymentMethodOptionsCustomerBalanceEuBankAccount, PromotionCode, SetupIntent, ShippingRate, Subscription, TaxId, TaxRate};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "Session".

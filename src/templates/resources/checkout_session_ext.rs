@@ -1,8 +1,8 @@
-use crate::client::{Client, Response};
-use crate::ids::CheckoutSessionId;
-use crate::params::Expand;
-use crate::resources::CheckoutSession;
-use crate::{CheckoutSessionItem, List};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::CheckoutSessionId;
+use crate::stripe::params::Expand;
+use crate::stripe::resources::CheckoutSession;
+use crate::stripe::{CheckoutSessionItem, List};
 
 /// The parameters for `CheckoutSession::retrieve_line_items`.
 #[derive(Clone, Debug, serde::Serialize, Default)]

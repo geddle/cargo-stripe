@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{AccountId};
-use crate::params::{Deleted, Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
-use crate::resources::{Address, Currency, DelayDays, ExternalAccount, File, Person, PersonVerificationParams, TaxId, VerificationDocumentParams};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{AccountId};
+use crate::stripe::params::{Deleted, Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
+use crate::stripe::resources::{Address, Currency, DelayDays, ExternalAccount, File, Person, PersonVerificationParams, TaxId, VerificationDocumentParams};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "Account".

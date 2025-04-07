@@ -2,8 +2,8 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::params::{Expandable};
-use crate::resources::{Charge, SetupAttempt};
+use crate::stripe::params::{Expandable};
+use crate::stripe::resources::{Charge, SetupAttempt};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "payment_method_sepa_debit".

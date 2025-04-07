@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{CustomerId, SubscriptionScheduleId};
-use crate::params::{Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
-use crate::resources::{Account, Application, CollectionMethod, ConnectAccountReference, Coupon, Currency, Customer, Discount, PaymentMethod, Plan, Price, PromotionCode, Scheduled, Subscription, SubscriptionTransferData, TaxId, TaxRate, TestHelpersTestClock};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{CustomerId, SubscriptionScheduleId};
+use crate::stripe::params::{Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
+use crate::stripe::resources::{Account, Application, CollectionMethod, ConnectAccountReference, Coupon, Currency, Customer, Discount, PaymentMethod, Plan, Price, PromotionCode, Scheduled, Subscription, SubscriptionTransferData, TaxId, TaxRate, TestHelpersTestClock};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "SubscriptionSchedule".

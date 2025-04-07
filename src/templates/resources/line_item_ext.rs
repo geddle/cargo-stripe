@@ -1,8 +1,8 @@
 use serde::{Deserialize, Serialize};
 
-use crate::client::{Client, Response};
-use crate::ids::{CustomerId, InvoiceId};
-use crate::resources::{Currency, InvoiceLineItem};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{CustomerId, InvoiceId};
+use crate::stripe::resources::{Currency, InvoiceLineItem};
 
 impl InvoiceLineItem {
     /// Creates an invoice line item.

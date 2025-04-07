@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{InvoiceLineItemId};
-use crate::params::{Expandable, Metadata, Object};
-use crate::resources::{BillingBillResourceInvoicingLinesCommonProrationDetails, BillingBillResourceInvoicingPricingPricing, BillingCreditBalanceTransaction, Currency, Discount, Period, Subscription};
+use crate::stripe::ids::{InvoiceLineItemId};
+use crate::stripe::params::{Expandable, Metadata, Object};
+use crate::stripe::resources::{BillingBillResourceInvoicingLinesCommonProrationDetails, BillingBillResourceInvoicingPricingPricing, BillingCreditBalanceTransaction, Currency, Discount, Period, Subscription};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "InvoiceLineItem".

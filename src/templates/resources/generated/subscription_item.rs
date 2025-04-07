@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{PlanId, PriceId, SubscriptionId, SubscriptionItemId};
-use crate::params::{Deleted, Expand, Expandable, List, Metadata, Object, Paginable, Timestamp};
-use crate::resources::{Currency, Discount, Plan, Price, TaxRate};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{PlanId, PriceId, SubscriptionId, SubscriptionItemId};
+use crate::stripe::params::{Deleted, Expand, Expandable, List, Metadata, Object, Paginable, Timestamp};
+use crate::stripe::resources::{Currency, Discount, Plan, Price, TaxRate};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "SubscriptionItem".

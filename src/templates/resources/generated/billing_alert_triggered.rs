@@ -2,8 +2,8 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::params::{Object, Timestamp};
-use crate::resources::{BillingAlert};
+use crate::stripe::params::{Object, Timestamp};
+use crate::stripe::resources::{BillingAlert};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "ThresholdsResourceAlert".

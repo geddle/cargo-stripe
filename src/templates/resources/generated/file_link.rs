@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{FileId, FileLinkId};
-use crate::params::{Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
-use crate::resources::{File, Scheduled};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{FileId, FileLinkId};
+use crate::stripe::params::{Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
+use crate::stripe::resources::{File, Scheduled};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "FileLink".

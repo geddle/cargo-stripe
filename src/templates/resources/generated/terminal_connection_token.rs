@@ -2,8 +2,8 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::params::{Expand, Object};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::params::{Expand, Object};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "TerminalConnectionToken".

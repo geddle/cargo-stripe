@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{CustomerId};
-use crate::params::{Expand, Expandable, Object, Timestamp};
-use crate::resources::{Customer};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{CustomerId};
+use crate::stripe::params::{Expand, Expandable, Object, Timestamp};
+use crate::stripe::resources::{Customer};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "CustomerSessionResourceCustomerSession".

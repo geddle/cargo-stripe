@@ -2,8 +2,8 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{TaxTransactionLineItemId};
-use crate::params::{Metadata, Object};
+use crate::stripe::ids::{TaxTransactionLineItemId};
+use crate::stripe::params::{Metadata, Object};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "TaxProductResourceTaxTransactionLineItem".

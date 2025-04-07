@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{ReportingReportRunId};
-use crate::params::{Object, Timestamp};
-use crate::resources::{Currency, File};
+use crate::stripe::ids::{ReportingReportRunId};
+use crate::stripe::params::{Object, Timestamp};
+use crate::stripe::resources::{Currency, File};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "reporting_report_run".

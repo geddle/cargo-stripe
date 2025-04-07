@@ -2,8 +2,8 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::params::{List, Object};
-use crate::resources::{EntitlementsActiveEntitlement};
+use crate::stripe::params::{List, Object};
+use crate::stripe::resources::{EntitlementsActiveEntitlement};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "ActiveEntitlementSummary".

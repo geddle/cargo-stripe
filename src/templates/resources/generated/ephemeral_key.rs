@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{CustomerId, EphemeralKeyId, IssuingCardId};
-use crate::params::{Deleted, Expand, Object, Timestamp};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{CustomerId, EphemeralKeyId, IssuingCardId};
+use crate::stripe::params::{Deleted, Expand, Object, Timestamp};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "EphemeralKey".

@@ -2,8 +2,8 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::params::{Timestamp};
-use crate::resources::{PaymentFlowsPrivatePaymentMethodsCardPresentCommonWallet, PaymentMethodDetailsCardPresentOffline};
+use crate::stripe::params::{Timestamp};
+use crate::stripe::resources::{PaymentFlowsPrivatePaymentMethodsCardPresentCommonWallet, PaymentMethodDetailsCardPresentOffline};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "payment_method_details_card_present".

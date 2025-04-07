@@ -2,8 +2,8 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::params::{Expandable};
-use crate::resources::{Account};
+use crate::stripe::params::{Expandable};
+use crate::stripe::resources::{Account};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "SubscriptionTransferData".

@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{ProductId, TaxCodeId};
-use crate::params::{CurrencyMap, Deleted, Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
-use crate::resources::{Currency, Price, TaxCode, UpTo};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{ProductId, TaxCodeId};
+use crate::stripe::params::{CurrencyMap, Deleted, Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
+use crate::stripe::resources::{Currency, Price, TaxCode, UpTo};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "Product".

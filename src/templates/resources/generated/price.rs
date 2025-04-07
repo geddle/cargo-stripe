@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{PriceId};
-use crate::params::{CurrencyMap, Expand, Expandable, IdOrCreate, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
-use crate::resources::{CreateProduct, Currency, CustomUnitAmount, Product, UpTo};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{PriceId};
+use crate::stripe::params::{CurrencyMap, Expand, Expandable, IdOrCreate, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
+use crate::stripe::resources::{CreateProduct, Currency, CustomUnitAmount, Product, UpTo};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "Price".

@@ -2,7 +2,7 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::resources::{Currency};
+use crate::stripe::resources::{Currency};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "TaxRateFlatAmount".

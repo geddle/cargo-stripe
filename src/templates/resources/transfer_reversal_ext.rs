@@ -1,10 +1,10 @@
 use serde::Deserialize;
 use serde::Serialize;
 
-use crate::client::{Client, Response};
-use crate::params::Metadata;
-use crate::resources::TransferReversal;
-use crate::TransferId;
+use crate::stripe::client::{Client, Response};
+use crate::stripe::params::Metadata;
+use crate::stripe::resources::TransferReversal;
+use crate::stripe::TransferId;
 
 /// The set of parameters that can be used when doing transfer reversal.
 ///

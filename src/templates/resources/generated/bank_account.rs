@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{BankAccountId};
-use crate::params::{Expandable, Metadata, Object};
-use crate::resources::{Account, BankAccountStatus, Currency, Customer};
+use crate::stripe::ids::{BankAccountId};
+use crate::stripe::params::{Expandable, Metadata, Object};
+use crate::stripe::resources::{Account, BankAccountStatus, Currency, Customer};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "BankAccount".

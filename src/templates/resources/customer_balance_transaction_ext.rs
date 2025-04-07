@@ -1,9 +1,9 @@
 use serde::Serialize;
 
-use crate::client::{Client, Response};
-use crate::ids::{CustomerBalanceTransactionId, CustomerId};
-use crate::params::{Expand, List, Metadata, Paginable};
-use crate::resources::{Currency, Customer, CustomerBalanceTransaction};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{CustomerBalanceTransactionId, CustomerId};
+use crate::stripe::params::{Expand, List, Metadata, Paginable};
+use crate::stripe::resources::{Currency, Customer, CustomerBalanceTransaction};
 
 /// The parameters for `CustomerBalanceTransaction::list`.
 #[derive(Clone, Debug, Serialize, Default)]

@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{IssuingPersonalizationDesignId};
-use crate::params::{Expandable, Metadata, Object, Timestamp};
-use crate::resources::{File, IssuingPhysicalBundle};
+use crate::stripe::ids::{IssuingPersonalizationDesignId};
+use crate::stripe::params::{Expandable, Metadata, Object, Timestamp};
+use crate::stripe::resources::{File, IssuingPhysicalBundle};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "IssuingPersonalizationDesign".

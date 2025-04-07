@@ -2,7 +2,7 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::resources::{PaymentFlowsPrivatePaymentMethodsCardPresentCommonWallet, PaymentMethodCardPresentNetworks, PaymentMethodDetailsCardPresentOffline};
+use crate::stripe::resources::{PaymentFlowsPrivatePaymentMethodsCardPresentCommonWallet, PaymentMethodCardPresentNetworks, PaymentMethodDetailsCardPresentOffline};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "payment_method_card_present".

@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{AccountId};
-use crate::params::{Expand, Object, Timestamp};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{AccountId};
+use crate::stripe::params::{Expand, Object, Timestamp};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "AccountLink".

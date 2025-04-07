@@ -6,6 +6,7 @@ use std::process;
 mod commands;
 mod components;
 mod core;
+// mod templates;
 mod utils;
 
 #[derive(Parser)]
@@ -83,38 +84,42 @@ async fn main() {
             // Display all available components
             let components = components::get_all_component_templates();
             println!("{}", "Available Stripe API components:".bold());
-            println!("These components include both extension files and generated resource definitions.\n");
-            
+            println!(
+                "These components include both extension files and generated resource definitions.\n"
+            );
+
             for component in &components {
                 println!("  • {}", component);
             }
-            
+
             println!("\n{}", "Special options:".bold());
             println!("  • all - Add all components at once (generates complete API)");
-            
+
             println!("\n{}", "Usage:".bold());
             println!("  cargo stripe add <component>");
             return;
-        },
+        }
         Some(Commands::Examples) => {
             println!("{}", "Usage Examples:".bold());
             println!("\n{}", "1. Initialize the Stripe SDK:".bold());
             println!("   cargo stripe init");
-            
+
             println!("\n{}", "2. Add a specific component:".bold());
             println!("   cargo stripe add payment_intent");
-            
+
             println!("\n{}", "3. Add all components:".bold());
             println!("   cargo stripe add all");
-            
+
             println!("\n{}", "4. List available components:".bold());
             println!("   cargo stripe list");
-            
+
             println!("\n{}", "Common errors:".bold());
             println!("   Using 'cargo run add ...' instead of 'cargo stripe add ...'");
-            println!("   This is incorrect because the tool is designed to be used as a cargo subcommand.");
+            println!(
+                "   This is incorrect because the tool is designed to be used as a cargo subcommand."
+            );
             return;
-        },
+        }
         None => {
             // If no subcommand is provided, show help
             Cli::command().print_help().unwrap();
@@ -127,17 +132,29 @@ async fn main() {
         Ok(msg) => println!("{}", msg.green()),
         Err(err) => {
             eprintln!("{}: {}", "Error".red().bold(), err);
-            
+
             // Add helpful hints for common errors
             if err.to_string().contains("Stripe SDK not initialized") {
-                eprintln!("\n{}: Run 'cargo stripe init' first, or ensure you're in the correct directory.", "Hint".yellow().bold());
+                eprintln!(
+                    "\n{}: Run 'cargo stripe init' first, or ensure you're in the correct directory.",
+                    "Hint".yellow().bold()
+                );
             } else if err.to_string().contains("Invalid component") {
-                eprintln!("\n{}: Run 'cargo stripe list' to see available components.", "Hint".yellow().bold());
+                eprintln!(
+                    "\n{}: Run 'cargo stripe list' to see available components.",
+                    "Hint".yellow().bold()
+                );
             } else if err.to_string().contains("Could not find the src directory") {
-                eprintln!("\n{}: Make sure you're in a Rust project or specify the target directory.", "Hint".yellow().bold());
+                eprintln!(
+                    "\n{}: Make sure you're in a Rust project or specify the target directory.",
+                    "Hint".yellow().bold()
+                );
             }
-            
-            eprintln!("\n{}: Run 'cargo stripe examples' for usage examples.", "Help".yellow().bold());
+
+            eprintln!(
+                "\n{}: Run 'cargo stripe examples' for usage examples.",
+                "Help".yellow().bold()
+            );
             process::exit(1);
         }
     }

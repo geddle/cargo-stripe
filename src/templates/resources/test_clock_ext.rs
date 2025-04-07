@@ -2,7 +2,7 @@
 
 use serde::Serialize;
 
-use crate::{
+use crate::stripe::{
     params::Paginable, Client, List, Response, TestHelpersTestClock, TestHelpersTestClockId,
     Timestamp,
 };

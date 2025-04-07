@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{IssuingCardId};
-use crate::params::{Expandable, Metadata, Object, Timestamp};
-use crate::resources::{Address, CardBrand, Currency, IssuingCardShippingStatus, IssuingCardShippingType, IssuingCardType, IssuingCardholder, IssuingPersonalizationDesign, MerchantCategory};
+use crate::stripe::ids::{IssuingCardId};
+use crate::stripe::params::{Expandable, Metadata, Object, Timestamp};
+use crate::stripe::resources::{Address, CardBrand, Currency, IssuingCardShippingStatus, IssuingCardShippingType, IssuingCardType, IssuingCardholder, IssuingPersonalizationDesign, MerchantCategory};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "IssuingCard".

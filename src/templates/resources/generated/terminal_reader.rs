@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{TerminalReaderId};
-use crate::params::{Expand, Expandable, List, Metadata, Object, Paginable};
-use crate::resources::{Charge, Currency, PaymentIntent, Refund, SetupIntent, TerminalLocation};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{TerminalReaderId};
+use crate::stripe::params::{Expand, Expandable, List, Metadata, Object, Paginable};
+use crate::stripe::resources::{Charge, Currency, PaymentIntent, Refund, SetupIntent, TerminalLocation};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "TerminalReaderReader".

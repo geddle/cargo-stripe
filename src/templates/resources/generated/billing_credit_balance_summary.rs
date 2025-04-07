@@ -2,8 +2,8 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::params::{Expandable, Object};
-use crate::resources::{BillingCreditGrantsResourceAmount, Customer};
+use crate::stripe::params::{Expandable, Object};
+use crate::stripe::resources::{BillingCreditGrantsResourceAmount, Customer};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "CreditBalanceSummary".

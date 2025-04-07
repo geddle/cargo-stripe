@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::params::Timestamp;
+use crate::stripe::params::Timestamp;
 
 /// An enum representing the versions of the Stripe API.
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, Eq, PartialEq)]

@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::resources::{BankAccount, Card};
+use crate::stripe::resources::{BankAccount, Card};
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(untagged, rename_all = "snake_case")]

@@ -1,6 +1,6 @@
-use crate::client::{Client, Response};
-use crate::ids::AccountId;
-use crate::resources::Balance;
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::AccountId;
+use crate::stripe::resources::Balance;
 
 impl Balance {
     /// Retrieves balance object by AccountId. Does not change stripe_account of the client.

@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{TaxTransactionId};
-use crate::params::{List, Metadata, Object, Timestamp};
-use crate::resources::{Currency, TaxProductResourceCustomerDetails, TaxProductResourceShipFromDetails, TaxTransactionLineItem};
+use crate::stripe::ids::{TaxTransactionId};
+use crate::stripe::params::{List, Metadata, Object, Timestamp};
+use crate::stripe::resources::{Currency, TaxProductResourceCustomerDetails, TaxProductResourceShipFromDetails, TaxTransactionLineItem};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "TaxProductResourceTaxTransaction".

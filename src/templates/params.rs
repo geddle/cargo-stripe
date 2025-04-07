@@ -4,9 +4,9 @@ use std::fmt::Display;
 use serde::de::DeserializeOwned;
 use serde::{Deserialize, Serialize};
 
-use crate::error::StripeError;
-use crate::resources::{ApiVersion, Currency};
-use crate::{
+use super::error::StripeError;
+use super::resources::{ApiVersion, Currency};
+use super::{
     AccountId, ApplicationId,
     client::{
         Client, Response,
@@ -442,7 +442,7 @@ where
 
     /// Pin a new future which maps the result inside the page future into
     /// a ListPaginator
-    #[cfg(feature = "async")]
+    
     fn create_paginator(page: Response<T>, params: P) -> Response<Self> {
         use futures_util::FutureExt;
         Box::pin(page.map(|page| page.map(|page| ListPaginator { page, params })))
@@ -563,14 +563,14 @@ mod tests {
         assert_eq!(to_snakecase("lower").as_str(), "lower");
     }
 
-    #[cfg(feature = "async")]
+    
     #[tokio::test]
     async fn list() {
         use httpmock::Method::GET;
         use httpmock::MockServer;
 
-        use crate::Client;
-        use crate::{Customer, ListCustomers};
+        use super::Client;
+        use super::{Customer, ListCustomers};
 
         // Start a lightweight mock server.
         let server = MockServer::start_async().await;
@@ -636,14 +636,14 @@ mod tests {
         next_item.assert_hits_async(1).await;
     }
 
-    #[cfg(feature = "async")]
+    
     #[tokio::test]
     async fn list_multiple() {
         use httpmock::Method::GET;
         use httpmock::MockServer;
 
-        use crate::Client;
-        use crate::{Customer, ListCustomers};
+        use super::Client;
+        use super::{Customer, ListCustomers};
 
         // Start a lightweight mock server.
         let server = MockServer::start_async().await;
@@ -727,8 +727,8 @@ mod tests {
         use httpmock::Method::GET;
         use httpmock::MockServer;
 
-        use crate::Client;
-        use crate::{Customer, ListCustomers};
+        use super::Client;
+        use super::{Customer, ListCustomers};
 
         // Start a lightweight mock server.
         let server = MockServer::start_async().await;
@@ -800,8 +800,8 @@ mod tests {
         use httpmock::Method::GET;
         use httpmock::MockServer;
 
-        use crate::Client;
-        use crate::{Customer, ListCustomers};
+        use super::Client;
+        use super::{Customer, ListCustomers};
 
         // Start a lightweight mock server.
         let server = MockServer::start_async().await;

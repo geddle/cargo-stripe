@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{TreasuryFinancialAccountId};
-use crate::params::{Metadata, Object, Timestamp};
-use crate::resources::{TreasuryFinancialAccountFeatures};
+use crate::stripe::ids::{TreasuryFinancialAccountId};
+use crate::stripe::params::{Metadata, Object, Timestamp};
+use crate::stripe::resources::{TreasuryFinancialAccountFeatures};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "TreasuryFinancialAccountsResourceFinancialAccount".

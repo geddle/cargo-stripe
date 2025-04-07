@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{FinancialConnectionsSessionId};
-use crate::params::{Expand, List, Object};
-use crate::resources::{BankConnectionsResourceAccountholder, FinancialConnectionsAccount};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{FinancialConnectionsSessionId};
+use crate::stripe::params::{Expand, List, Object};
+use crate::stripe::resources::{BankConnectionsResourceAccountholder, FinancialConnectionsAccount};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "BankConnectionsResourceLinkAccountSession".

@@ -2,8 +2,8 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::params::{Object};
-use crate::resources::{Address, Currency};
+use crate::stripe::params::{Object};
+use crate::stripe::resources::{Address, Currency};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "CustomerBalanceFundingInstructionsCustomerBalanceFundingInstructions".

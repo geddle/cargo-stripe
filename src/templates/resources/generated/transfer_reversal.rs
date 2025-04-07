@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{TransferReversalId};
-use crate::params::{Expandable, Metadata, Object, Timestamp};
-use crate::resources::{BalanceTransaction, Currency, Refund, Transfer};
+use crate::stripe::ids::{TransferReversalId};
+use crate::stripe::params::{Expandable, Metadata, Object, Timestamp};
+use crate::stripe::resources::{BalanceTransaction, Currency, Refund, Transfer};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "TransferReversal".

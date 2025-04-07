@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{RadarValueListId};
-use crate::params::{List, Metadata, Object, Timestamp};
-use crate::resources::{RadarValueListItem};
+use crate::stripe::ids::{RadarValueListId};
+use crate::stripe::params::{List, Metadata, Object, Timestamp};
+use crate::stripe::resources::{RadarValueListItem};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "RadarListList".

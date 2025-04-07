@@ -2,8 +2,8 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{IssuingPhysicalBundleId};
-use crate::params::{Object};
+use crate::stripe::ids::{IssuingPhysicalBundleId};
+use crate::stripe::params::{Object};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "IssuingPhysicalBundle".

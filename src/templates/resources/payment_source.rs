@@ -1,9 +1,9 @@
 use serde::ser::SerializeStruct;
 use serde::{Deserialize, Serialize};
 
-use crate::ids::{PaymentSourceId, SourceId, TokenId};
-use crate::params::Object;
-use crate::resources::{Account, BankAccount, Card, Currency, Source};
+use crate::stripe::ids::{PaymentSourceId, SourceId, TokenId};
+use crate::stripe::params::Object;
+use crate::stripe::resources::{Account, BankAccount, Card, Currency, Source};
 
 /// A PaymentSourceParams represents all of the supported ways that can
 /// be used.

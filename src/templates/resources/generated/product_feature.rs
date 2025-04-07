@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{ProductFeatureId};
-use crate::params::{Object};
-use crate::resources::{EntitlementsFeature};
+use crate::stripe::ids::{ProductFeatureId};
+use crate::stripe::params::{Object};
+use crate::stripe::resources::{EntitlementsFeature};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "ProductFeature".

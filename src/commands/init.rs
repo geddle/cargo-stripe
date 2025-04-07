@@ -176,6 +176,8 @@ fn add_dependencies(root_dir: &Path) -> Result<()> {
         ("thiserror", "1.0", None),
         ("smart-default", "0.7", None),
         ("http-types", "2.12", None),
+        ("hyper", "1.6", None),
+        ("smol_str", "0.3", None),
     ];
 
     // Get or create dependencies table

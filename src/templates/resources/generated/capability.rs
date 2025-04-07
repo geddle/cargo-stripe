@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{CapabilityId};
-use crate::params::{Expandable, Object, Timestamp};
-use crate::resources::{Account};
+use crate::stripe::ids::{CapabilityId};
+use crate::stripe::params::{Expandable, Object, Timestamp};
+use crate::stripe::resources::{Account};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "AccountCapability".

@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{InvoiceId, InvoicePaymentId};
-use crate::params::{Expand, Expandable, List, Object, Paginable, Timestamp};
-use crate::resources::{Charge, Currency, Invoice, PaymentIntent};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{InvoiceId, InvoicePaymentId};
+use crate::stripe::params::{Expand, Expandable, List, Object, Paginable, Timestamp};
+use crate::stripe::resources::{Charge, Currency, Invoice, PaymentIntent};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "InvoicesInvoicePayment".

@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{ChargeId, CustomerId, PaymentIntentId};
-use crate::params::{Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
-use crate::resources::{Account, Address, Application, ApplicationFee, BalanceTransaction, BillingDetails, ChargeSourceParams, Currency, Customer, Mandate, PaymentFlowsPaymentIntentPresentmentDetails, PaymentIntent, PaymentMethod, PaymentMethodDetailsCardInstallmentsPlan, PaymentMethodDetailsCardPresent, PaymentMethodDetailsCardWalletApplePay, PaymentMethodDetailsCardWalletGooglePay, PaymentMethodDetailsPassthroughCard, PaymentSource, RadarRadarOptions, Refund, Review, Shipping, Transfer};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{ChargeId, CustomerId, PaymentIntentId};
+use crate::stripe::params::{Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
+use crate::stripe::resources::{Account, Address, Application, ApplicationFee, BalanceTransaction, BillingDetails, ChargeSourceParams, Currency, Customer, Mandate, PaymentFlowsPaymentIntentPresentmentDetails, PaymentIntent, PaymentMethod, PaymentMethodDetailsCardInstallmentsPlan, PaymentMethodDetailsCardPresent, PaymentMethodDetailsCardWalletApplePay, PaymentMethodDetailsCardWalletGooglePay, PaymentMethodDetailsPassthroughCard, PaymentSource, RadarRadarOptions, Refund, Review, Shipping, Transfer};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "Charge".

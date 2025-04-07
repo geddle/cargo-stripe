@@ -2,7 +2,7 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::resources::{Discount, TaxRate};
+use crate::stripe::resources::{Discount, TaxRate};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "QuotesResourceTotalDetails".

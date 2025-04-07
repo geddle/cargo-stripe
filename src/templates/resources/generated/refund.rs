@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{ChargeId, CustomerId, PaymentIntentId, RefundId};
-use crate::params::{Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
-use crate::resources::{BalanceTransaction, Charge, Currency, PaymentFlowsPaymentIntentPresentmentDetails, PaymentIntent, TransferReversal};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{ChargeId, CustomerId, PaymentIntentId, RefundId};
+use crate::stripe::params::{Expand, Expandable, List, Metadata, Object, Paginable, RangeQuery, Timestamp};
+use crate::stripe::resources::{BalanceTransaction, Charge, Currency, PaymentFlowsPaymentIntentPresentmentDetails, PaymentIntent, TransferReversal};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "Refund".

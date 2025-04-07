@@ -2,7 +2,7 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::resources::{IssuingAuthorization, TreasuryCreditReversal, TreasuryDebitReversal, TreasuryInboundTransfer, TreasuryOutboundPayment, TreasuryOutboundTransfer, TreasuryReceivedCredit, TreasuryReceivedDebit};
+use crate::stripe::resources::{IssuingAuthorization, TreasuryCreditReversal, TreasuryDebitReversal, TreasuryInboundTransfer, TreasuryOutboundPayment, TreasuryOutboundTransfer, TreasuryReceivedCredit, TreasuryReceivedDebit};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "TreasuryTransactionsResourceFlowDetails".

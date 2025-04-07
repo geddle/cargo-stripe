@@ -1,5 +1,5 @@
-use crate::ids::*;
-use crate::params::Object;
+use crate::stripe::ids::*;
+use crate::stripe::params::Object;
 use serde::{Deserialize, Serialize};
 
 #[cfg(not(feature = "connect"))]

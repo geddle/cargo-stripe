@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{TreasuryReceivedCreditId};
-use crate::params::{Expandable, Object, Timestamp};
-use crate::resources::{Currency, Payout, TreasuryCreditReversal, TreasuryOutboundPayment, TreasuryOutboundTransfer, TreasurySharedResourceInitiatingPaymentMethodDetailsInitiatingPaymentMethodDetails, TreasuryTransaction};
+use crate::stripe::ids::{TreasuryReceivedCreditId};
+use crate::stripe::params::{Expandable, Object, Timestamp};
+use crate::stripe::resources::{Currency, Payout, TreasuryCreditReversal, TreasuryOutboundPayment, TreasuryOutboundTransfer, TreasurySharedResourceInitiatingPaymentMethodDetailsInitiatingPaymentMethodDetails, TreasuryTransaction};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "TreasuryReceivedCreditsResourceReceivedCredit".

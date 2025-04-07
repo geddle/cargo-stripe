@@ -1,8 +1,8 @@
 use serde::{Deserialize, Serialize};
 
-use crate::ids::BalanceTransactionSourceId;
-use crate::params::Object;
-use crate::resources::{
+use crate::stripe::ids::BalanceTransactionSourceId;
+use crate::stripe::params::Object;
+use crate::stripe::resources::{
     ApplicationFee, ApplicationFeeRefund, Charge, ConnectCollectionTransfer, Dispute,
     IssuingAuthorization, IssuingDispute, IssuingTransaction, Payout, PlatformTaxFee, Refund,
     ReserveTransaction, TaxDeductedAtSource, Topup, Transfer, TransferReversal,

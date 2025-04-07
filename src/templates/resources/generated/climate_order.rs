@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{ClimateOrderId};
-use crate::params::{Expandable, Metadata, Object, Timestamp};
-use crate::resources::{ClimateProduct, ClimateSupplier, Currency};
+use crate::stripe::ids::{ClimateOrderId};
+use crate::stripe::params::{Expandable, Metadata, Object, Timestamp};
+use crate::stripe::resources::{ClimateProduct, ClimateSupplier, Currency};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "ClimateRemovalsOrders".

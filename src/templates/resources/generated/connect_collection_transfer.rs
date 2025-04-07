@@ -2,9 +2,9 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::ids::{ConnectCollectionTransferId};
-use crate::params::{Expandable, Object};
-use crate::resources::{Account, Currency};
+use crate::stripe::ids::{ConnectCollectionTransferId};
+use crate::stripe::params::{Expandable, Object};
+use crate::stripe::resources::{Account, Currency};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "ConnectCollectionTransfer".

@@ -2,8 +2,8 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::params::{Object};
-use crate::resources::{TreasuryFinancialAccountsResourceOutboundAchToggleSettings, TreasuryFinancialAccountsResourceToggleSettings};
+use crate::stripe::params::{Object};
+use crate::stripe::resources::{TreasuryFinancialAccountsResourceOutboundAchToggleSettings, TreasuryFinancialAccountsResourceToggleSettings};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "TreasuryFinancialAccountsResourceFinancialAccountFeatures".

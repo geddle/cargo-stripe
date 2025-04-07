@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{CustomerId, QuoteId};
-use crate::params::{Expand, Expandable, List, Metadata, Object, Paginable, Timestamp};
-use crate::resources::{Account, Application, CheckoutSessionItem, ConnectAccountReference, Currency, Customer, Discount, Invoice, QuotesResourceTotalDetails, Subscription, SubscriptionSchedule, TaxRate, TestHelpersTestClock};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{CustomerId, QuoteId};
+use crate::stripe::params::{Expand, Expandable, List, Metadata, Object, Paginable, Timestamp};
+use crate::stripe::resources::{Account, Application, CheckoutSessionItem, ConnectAccountReference, Currency, Customer, Discount, Invoice, QuotesResourceTotalDetails, Subscription, SubscriptionSchedule, TaxRate, TestHelpersTestClock};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "Quote".

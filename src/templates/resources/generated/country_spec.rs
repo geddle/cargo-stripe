@@ -2,10 +2,10 @@
 // This file was automatically generated.
 // ======================================
 
-use crate::client::{Client, Response};
-use crate::ids::{CountrySpecId};
-use crate::params::{Expand, List, Object, Paginable};
-use crate::resources::{Currency};
+use crate::stripe::client::{Client, Response};
+use crate::stripe::ids::{CountrySpecId};
+use crate::stripe::params::{Expand, List, Object, Paginable};
+use crate::stripe::resources::{Currency};
 use serde::{Deserialize, Serialize};
 
 /// The resource representing a Stripe "CountrySpec".
