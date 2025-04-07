@@ -31,13 +31,13 @@ pub fn generate_component(component: &str) -> Result<String> {
         "customer" => {
             Ok(str::from_utf8(include_bytes!("templates/components/customer.rs"))?.to_string())
         }
-        // "charge" => {
-        //     Ok(str::from_utf8(include_bytes!("templates/components/charge.rs"))?.to_string())
-        // }
-        // "payment_intent" => Ok(str::from_utf8(include_bytes!(
-        //     "templates/components/payment_intent.rs"
-        // ))?
-        // .to_string()),
+        "charge" => {
+            Ok(str::from_utf8(include_bytes!("templates/components/charge.rs"))?.to_string())
+        }
+        "payment_intent" => Ok(str::from_utf8(include_bytes!(
+            "templates/components/payment_intent.rs"
+        ))?
+        .to_string()),
         // "payment_method" => Ok(str::from_utf8(include_bytes!(
         //     "templates/components/payment_method.rs"
         // ))?
