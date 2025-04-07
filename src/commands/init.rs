@@ -48,8 +48,19 @@ pub fn run(target_dir: Option<&PathBuf>, force: bool) -> Result<String> {
         );
     }
 
+    // Create the resources directory
+    let resources_dir = stripe_dir.join("resources");
+    if !resources_dir.exists() {
+        fs::create_dir_all(&resources_dir).context("Failed to create resources directory")?;
+        println!(
+            "{} Created directory: {}",
+            "✓".green(),
+            resources_dir.display()
+        );
+    }
+
     // Generate and write core files
-    write_core_files(&stripe_dir, &client_dir, force)?;
+    write_core_files(&stripe_dir, &client_dir, &resources_dir, force)?;
 
     // Add the required dependencies to Cargo.toml
     add_dependencies(&root_dir)?;
@@ -61,14 +72,17 @@ pub fn run(target_dir: Option<&PathBuf>, force: bool) -> Result<String> {
 }
 
 /// Write all core SDK files to the project
-fn write_core_files(stripe_dir: &Path, client_dir: &Path, force: bool) -> Result<()> {
+fn write_core_files(
+    stripe_dir: &Path,
+    client_dir: &Path,
+    resources_dir: &Path,
+    force: bool,
+) -> Result<()> {
     // Create main files
-
-    // Create lib.rs - Main library file
-    let lib_rs_content = core::generate_lib_rs()?;
+    let lib_rs_content = core::generate_mod_rs()?;
     fs_utils::write_file(
         &stripe_dir.join("mod.rs"),
-        &lib_rs_content,
+        lib_rs_content,
         force,
         "stripe/mod.rs",
     )?;
@@ -77,7 +91,7 @@ fn write_core_files(stripe_dir: &Path, client_dir: &Path, force: bool) -> Result
     let error_rs_content = core::generate_error_rs()?;
     fs_utils::write_file(
         &stripe_dir.join("error.rs"),
-        &error_rs_content,
+        error_rs_content,
         force,
         "stripe/error.rs",
     )?;
@@ -86,7 +100,7 @@ fn write_core_files(stripe_dir: &Path, client_dir: &Path, force: bool) -> Result
     let ids_rs_content = core::generate_ids_rs()?;
     fs_utils::write_file(
         &stripe_dir.join("ids.rs"),
-        &ids_rs_content,
+        ids_rs_content,
         force,
         "stripe/ids.rs",
     )?;
@@ -95,18 +109,28 @@ fn write_core_files(stripe_dir: &Path, client_dir: &Path, force: bool) -> Result
     let params_rs_content = core::generate_params_rs()?;
     fs_utils::write_file(
         &stripe_dir.join("params.rs"),
-        &params_rs_content,
+        params_rs_content,
         force,
         "stripe/params.rs",
     )?;
 
-    // Create resources.rs - Resource definitions
-    let resources_rs_content = core::generate_resources_rs()?;
+    // Create resources/types.rs - Common types
+    if let Ok(types_content) = core::generate_resource_types_file() {
+        fs_utils::write_file(
+            &resources_dir.join("types.rs"),
+            &types_content,
+            force,
+            "stripe/resources/types.rs",
+        )?;
+    }
+
+    // Create resources/mod.rs - Initial module declarations
+    let resources_mod_content = "//! Stripe API resources\n\npub mod types;\n";
     fs_utils::write_file(
-        &stripe_dir.join("resources.rs"),
-        &resources_rs_content,
+        &resources_dir.join("mod.rs"),
+        resources_mod_content,
         force,
-        "stripe/resources.rs",
+        "stripe/resources/mod.rs",
     )?;
 
     // Create client files
@@ -115,7 +139,7 @@ fn write_core_files(stripe_dir: &Path, client_dir: &Path, force: bool) -> Result
     let client_mod_rs_content = core::generate_client_mod_rs()?;
     fs_utils::write_file(
         &client_dir.join("mod.rs"),
-        &client_mod_rs_content,
+        client_mod_rs_content,
         force,
         "stripe/client/mod.rs",
     )?;
@@ -124,7 +148,7 @@ fn write_core_files(stripe_dir: &Path, client_dir: &Path, force: bool) -> Result
     let request_strategy_rs_content = core::generate_client_request_strategy_rs()?;
     fs_utils::write_file(
         &client_dir.join("request_strategy.rs"),
-        &request_strategy_rs_content,
+        request_strategy_rs_content,
         force,
         "stripe/client/request_strategy.rs",
     )?;
@@ -133,7 +157,7 @@ fn write_core_files(stripe_dir: &Path, client_dir: &Path, force: bool) -> Result
     let stripe_rs_content = core::generate_client_stripe_rs()?;
     fs_utils::write_file(
         &client_dir.join("stripe.rs"),
-        &stripe_rs_content,
+        stripe_rs_content,
         force,
         "stripe/client/stripe.rs",
     )?;
@@ -142,7 +166,7 @@ fn write_core_files(stripe_dir: &Path, client_dir: &Path, force: bool) -> Result
     let tokio_rs_content = core::generate_client_tokio_rs()?;
     fs_utils::write_file(
         &client_dir.join("tokio.rs"),
-        &tokio_rs_content,
+        tokio_rs_content,
         force,
         "stripe/client/tokio.rs",
     )?;
@@ -178,6 +202,10 @@ fn add_dependencies(root_dir: &Path) -> Result<()> {
         ("http-types", "2.12", None),
         ("hyper", "1.6", None),
         ("smol_str", "0.3", None),
+        ("futures_util", "0.3", None),
+        ("hyper_rustls", "0.27", None),
+        ("serde_path_to_error", "0.1", None),
+        ("serde_qs", "0.14", None),
     ];
 
     // Get or create dependencies table

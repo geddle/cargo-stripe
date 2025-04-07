@@ -3,16 +3,16 @@ use std::pin::Pin;
 
 use http_types::{Request, StatusCode};
 use hyper::http;
-use hyper::{client::HttpConnector, Body};
+use hyper::{Body, client::HttpConnector};
 use serde::de::DeserializeOwned;
 use tokio::time::sleep;
 
 use crate::stripe::client::request_strategy::{Outcome, RequestStrategy};
 use crate::stripe::error::{ErrorResponse, StripeError};
 
-#[cfg(feature = "hyper-rustls-native")]
+// #[cfg(feature = "hyper-rustls-native")]
 mod connector {
-    use hyper::client::{connect::dns::GaiResolver, HttpConnector};
+    use hyper::client::{HttpConnector, connect::dns::GaiResolver};
     pub use hyper_rustls::HttpsConnector;
     use hyper_rustls::HttpsConnectorBuilder;
 
@@ -26,34 +26,34 @@ mod connector {
     }
 }
 
-#[cfg(feature = "hyper-rustls-webpki")]
-mod connector {
-    use hyper::client::{connect::dns::GaiResolver, HttpConnector};
-    pub use hyper_rustls::HttpsConnector;
-    use hyper_rustls::HttpsConnectorBuilder;
+// #[cfg(feature = "hyper-rustls-webpki")]
+// mod connector {
+//     use hyper::client::{connect::dns::GaiResolver, HttpConnector};
+//     pub use hyper_rustls::HttpsConnector;
+//     use hyper_rustls::HttpsConnectorBuilder;
 
-    pub fn create() -> HttpsConnector<HttpConnector<GaiResolver>> {
-        HttpsConnectorBuilder::new()
-            .with_webpki_roots()
-            .https_or_http()
-            .enable_http1()
-            .enable_http2()
-            .build()
-    }
-}
+//     pub fn create() -> HttpsConnector<HttpConnector<GaiResolver>> {
+//         HttpsConnectorBuilder::new()
+//             .with_webpki_roots()
+//             .https_or_http()
+//             .enable_http1()
+//             .enable_http2()
+//             .build()
+//     }
+// }
 
-#[cfg(feature = "hyper-tls")]
-mod connector {
-    use hyper::client::{connect::dns::GaiResolver, HttpConnector};
-    pub use hyper_tls::HttpsConnector;
+// #[cfg(feature = "hyper-tls")]
+// mod connector {
+//     use hyper::client::{connect::dns::GaiResolver, HttpConnector};
+//     pub use hyper_tls::HttpsConnector;
 
-    pub fn create() -> HttpsConnector<HttpConnector<GaiResolver>> {
-        HttpsConnector::new()
-    }
-}
+//     pub fn create() -> HttpsConnector<HttpConnector<GaiResolver>> {
+//         HttpsConnector::new()
+//     }
+// }
 
-#[cfg(all(feature = "hyper-tls", feature = "hyper-rustls"))]
-compile_error!("You must enable only one TLS implementation");
+// #[cfg(all(feature = "hyper-tls", feature = "hyper-rustls"))]
+// compile_error!("You must enable only one TLS implementation");
 
 type HttpClient = hyper::Client<connector::HttpsConnector<HttpConnector>, Body>;
 
@@ -85,7 +85,9 @@ impl Default for TokioClient {
 impl TokioClient {
     pub fn new() -> Self {
         Self {
-            client: hyper::Client::builder().pool_max_idle_per_host(0).build(connector::create()),
+            client: hyper::Client::builder()
+                .pool_max_idle_per_host(0)
+                .build(connector::create()),
         }
     }
 
@@ -187,7 +189,10 @@ async fn send_inner(
 /// note: this is necesarry because `http` deliberately does not support a `Body` type
 ///       so hyper has a `Body` for which http_types cannot provide automatic conversion.
 async fn convert_request(mut request: http_types::Request) -> http::Request<hyper::Body> {
-    let body = request.body_bytes().await.expect("We know the data is a valid bytes object.");
+    let body = request
+        .body_bytes()
+        .await
+        .expect("We know the data is a valid bytes object.");
     let request: http::Request<_> = request.into();
     http::Request::from_parts(request.into_parts().0, hyper::Body::from(body))
 }
@@ -196,12 +201,12 @@ async fn convert_request(mut request: http_types::Request) -> http::Request<hype
 mod tests {
     use http_types::{Method, Request, Url};
     use httpmock::prelude::*;
-    use hyper::{body::to_bytes, Body, Request as HyperRequest};
+    use hyper::{Body, Request as HyperRequest, body::to_bytes};
 
-    use super::convert_request;
     use super::TokioClient;
-    use crate::stripe::client::request_strategy::RequestStrategy;
+    use super::convert_request;
     use crate::stripe::StripeError;
+    use crate::stripe::client::request_strategy::RequestStrategy;
 
     const TEST_URL: &str = "https://api.stripe.com/v1/";
 
@@ -227,7 +232,11 @@ mod tests {
 
         req_equal(
             convert_request(req).await,
-            HyperRequest::builder().method("POST").uri(TEST_URL).body(Body::from(body)).unwrap(),
+            HyperRequest::builder()
+                .method("POST")
+                .uri(TEST_URL)
+                .body(Body::from(body))
+                .unwrap(),
         )
         .await;
     }
@@ -241,7 +250,11 @@ mod tests {
 
         req_equal(
             convert_request(req).await,
-            HyperRequest::builder().method("POST").uri(TEST_URL).body(Body::from(body)).unwrap(),
+            HyperRequest::builder()
+                .method("POST")
+                .uri(TEST_URL)
+                .body(Body::from(body))
+                .unwrap(),
         )
         .await;
     }
@@ -251,7 +264,10 @@ mod tests {
         let (b_parts, b_body) = b.into_parts();
 
         assert_eq!(a_parts.method, b_parts.method);
-        assert_eq!(to_bytes(a_body).await.unwrap().len(), to_bytes(b_body).await.unwrap().len());
+        assert_eq!(
+            to_bytes(a_body).await.unwrap().len(),
+            to_bytes(b_body).await.unwrap().len()
+        );
     }
 
     #[tokio::test]
@@ -333,13 +349,19 @@ mod tests {
         });
 
         let req = Request::get(Url::parse(&server.url("/v1/odd_data")).unwrap());
-        let res = client.execute::<DataType>(req, &RequestStrategy::Retry(3)).await;
+        let res = client
+            .execute::<DataType>(req, &RequestStrategy::Retry(3))
+            .await;
 
         mock.assert_hits_async(1).await;
 
         match res {
             Err(StripeError::JSONSerialize(err)) => {
-                println!("Error: {:?} Path: {:?}", err.inner(), err.path().to_string())
+                println!(
+                    "Error: {:?} Path: {:?}",
+                    err.inner(),
+                    err.path().to_string()
+                )
             }
             _ => panic!("Expected stripe error {:?}", res),
         }

@@ -56,7 +56,7 @@ pub fn find_src_directory(target_dir: Option<&Path>) -> Result<PathBuf> {
 }
 
 /// Write content to a file, asking for confirmation if the file exists and force is false
-pub fn write_file(path: &Path, content: &str, force: bool, relative_path: &str) -> Result<()> {
+pub fn write_file<T: AsRef<[u8]>>(path: &Path, content: T, force: bool, relative_path: &str) -> Result<()> {
     if path.exists() && !force {
         let response = prompt_yes_no(&format!(
             "The file {} already exists. Overwrite?",

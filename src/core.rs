@@ -1,11 +1,16 @@
 use anyhow::Result;
-use std::str;
 
 // Main files
 
 /// Generate the content for lib.rs
-pub fn generate_lib_rs() -> Result<&'static str> {
-    Ok(include_str!("templates/mod.rs"))
+pub fn generate_mod_rs() -> Result<&'static str> {
+    Ok("//! Stripe API SDK for Rust\n\n\
+         //! This module contains automatically generated Stripe API bindings.\n\n\
+         pub mod error;\n\
+         pub mod ids;\n\
+         pub mod params;\n\
+         pub mod resources;\n\
+         pub mod client;\n")
 }
 
 /// Generate the content for error.rs
@@ -23,9 +28,19 @@ pub fn generate_params_rs() -> Result<&'static str> {
     Ok(include_str!("templates/params.rs"))
 }
 
-/// Generate the content for resources.rs
-pub fn generate_resources_rs() -> Result<&'static str> {
-    Ok(include_str!("templates/resources.rs"))
+/// Generate the content for resources/types.rs
+pub fn generate_resource_types_file() -> Result<String> {
+    let template_path = "src/templates/resources/types.rs";
+
+    if std::path::Path::new(&template_path).exists() {
+        let content = std::fs::read_to_string(template_path)?;
+        return Ok(content);
+    }
+
+    Ok(
+        "//! Common types used in Stripe API resources\n\n// Type definitions would be here\n"
+            .to_string(),
+    )
 }
 
 // Client files
