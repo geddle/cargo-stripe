@@ -125,7 +125,7 @@ fn write_core_files(
     }
 
     // Create resources/mod.rs - Initial module declarations
-    let resources_mod_content = "//! Stripe API resources\n\npub mod types;\n";
+    let resources_mod_content = "//! Stripe API resources\n\npub mod types;\npub use types::*;";
     fs_utils::write_file(
         &resources_dir.join("mod.rs"),
         resources_mod_content,
@@ -202,8 +202,8 @@ fn add_dependencies(root_dir: &Path) -> Result<()> {
         ("http-types", "2.12", None),
         ("hyper", "1.6", None),
         ("smol_str", "0.3", None),
-        ("futures_util", "0.3", None),
-        ("hyper_rustls", "0.27", None),
+        ("futures-util", "0.3", None),
+        ("hyper-rustls", "0.27", None),
         ("serde_path_to_error", "0.1", None),
         ("serde_qs", "0.14", None),
     ];

@@ -4,9 +4,9 @@ use std::fmt::Display;
 use serde::de::DeserializeOwned;
 use serde::{Deserialize, Serialize};
 
-use super::error::StripeError;
-use super::resources::{ApiVersion, Currency};
-use super::{
+use crate::stripe::error::StripeError;
+use crate::stripe::resources::{ApiVersion, Currency};
+use crate::stripe::{
     AccountId, ApplicationId,
     client::{
         Client, Response,
@@ -362,8 +362,8 @@ where
     /// # }
     /// ```
     ///
-    /// Requires `feature = ["async", "stream"]`.
-    #[cfg(all(feature = "async", feature = "stream"))]
+    /// Requires `feature = ["stream"]`.
+    #[cfg(feature = "stream")]
     pub fn stream(
         mut self,
         client: &Client,
@@ -378,7 +378,7 @@ where
     }
 
     /// unfold a single item from the stream
-    #[cfg(all(feature = "async", feature = "stream"))]
+    #[cfg(feature = "stream")]
     async fn unfold_stream(
         state: Option<(Self, Client)>,
     ) -> Option<(Result<T::O, StripeError>, Option<(Self, Client)>)> {
@@ -442,7 +442,7 @@ where
 
     /// Pin a new future which maps the result inside the page future into
     /// a ListPaginator
-    
+
     fn create_paginator(page: Response<T>, params: P) -> Response<Self> {
         use futures_util::FutureExt;
         Box::pin(page.map(|page| page.map(|page| ListPaginator { page, params })))
@@ -554,7 +554,7 @@ pub fn to_snakecase(camel: &str) -> String {
 mod tests {
     #[test]
     fn to_snakecase() {
-        use super::to_snakecase;
+        use crate::stripe::to_snakecase;
 
         assert_eq!(to_snakecase("snake_case").as_str(), "snake_case");
         assert_eq!(to_snakecase("CamelCase").as_str(), "camel_case");
@@ -563,14 +563,13 @@ mod tests {
         assert_eq!(to_snakecase("lower").as_str(), "lower");
     }
 
-    
     #[tokio::test]
     async fn list() {
         use httpmock::Method::GET;
         use httpmock::MockServer;
 
-        use super::Client;
-        use super::{Customer, ListCustomers};
+        use crate::stripe::Client;
+        use crate::stripe::{Customer, ListCustomers};
 
         // Start a lightweight mock server.
         let server = MockServer::start_async().await;
@@ -636,14 +635,13 @@ mod tests {
         next_item.assert_hits_async(1).await;
     }
 
-    
     #[tokio::test]
     async fn list_multiple() {
         use httpmock::Method::GET;
         use httpmock::MockServer;
 
-        use super::Client;
-        use super::{Customer, ListCustomers};
+        use crate::stripe::Client;
+        use crate::stripe::{Customer, ListCustomers};
 
         // Start a lightweight mock server.
         let server = MockServer::start_async().await;
@@ -720,15 +718,15 @@ mod tests {
         next_item.assert_hits_async(1).await;
     }
 
-    #[cfg(all(feature = "async", feature = "stream"))]
+    #[cfg(feature = "stream")]
     #[tokio::test]
     async fn stream() {
         use futures_util::StreamExt;
         use httpmock::Method::GET;
         use httpmock::MockServer;
 
-        use super::Client;
-        use super::{Customer, ListCustomers};
+        use crate::stripe::Client;
+        use crate::stripe::{Customer, ListCustomers};
 
         // Start a lightweight mock server.
         let server = MockServer::start_async().await;
@@ -793,15 +791,15 @@ mod tests {
         next_item.assert_hits_async(1).await;
     }
 
-    #[cfg(all(feature = "async", feature = "stream"))]
+    #[cfg(feature = "stream")]
     #[tokio::test]
     async fn stream_multiple() {
         use futures_util::StreamExt;
         use httpmock::Method::GET;
         use httpmock::MockServer;
 
-        use super::Client;
-        use super::{Customer, ListCustomers};
+        use crate::stripe::Client;
+        use crate::stripe::{Customer, ListCustomers};
 
         // Start a lightweight mock server.
         let server = MockServer::start_async().await;

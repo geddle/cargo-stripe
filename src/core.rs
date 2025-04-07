@@ -5,12 +5,19 @@ use anyhow::Result;
 /// Generate the content for lib.rs
 pub fn generate_mod_rs() -> Result<&'static str> {
     Ok("//! Stripe API SDK for Rust\n\n\
-         //! This module contains automatically generated Stripe API bindings.\n\n\
-         pub mod error;\n\
-         pub mod ids;\n\
-         pub mod params;\n\
-         pub mod resources;\n\
-         pub mod client;\n")
+        //! This module contains automatically generated Stripe API bindings.\n\n\
+        pub mod client;
+        pub mod error;
+        pub mod ids;
+        pub mod params;
+        pub mod resources;
+
+        pub use client::*;
+        pub use error::*;
+        pub use ids::*;
+        pub use params::*;
+        pub use resources::*;
+")
 }
 
 /// Generate the content for error.rs

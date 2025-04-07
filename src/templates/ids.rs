@@ -650,7 +650,7 @@ mod tests {
     use serde::{Deserialize, Serialize};
     use serde_json::json;
 
-    use super::*;
+    use crate::stripe::*;
 
     fn assert_ser_de_roundtrip<T>(id: &str)
     where
