@@ -7,11 +7,11 @@ use serde::{Deserialize, Serialize};
 use crate::error::StripeError;
 use crate::resources::{ApiVersion, Currency};
 use crate::{
-    client::{
-        config::{err, ok},
-        Client, Response,
-    },
     AccountId, ApplicationId,
+    client::{
+        Client, Response,
+        config::{err, ok},
+    },
 };
 
 #[derive(Clone, Default)]
@@ -227,7 +227,14 @@ impl<T: Paginate + DeserializeOwned + Send + Sync + 'static + Clone + std::fmt::
         has_more: bool,
         total_count: Option<u64>,
     ) -> SearchList<T> {
-        Self { object: "".to_string(), url, has_more, data, next_page: None, total_count }
+        Self {
+            object: "".to_string(),
+            url,
+            has_more,
+            data,
+            next_page: None,
+            total_count,
+        }
     }
 
     fn get_data_mut(&mut self) -> &mut Vec<Self::O> {
@@ -254,7 +261,12 @@ impl<T: Paginate + DeserializeOwned + Send + Sync + 'static + Clone + std::fmt::
     type O = T;
 
     fn new(data: Vec<Self::O>, url: String, has_more: bool, total_count: Option<u64>) -> List<T> {
-        Self { url, has_more, data, total_count }
+        Self {
+            url,
+            has_more,
+            data,
+            total_count,
+        }
     }
 
     fn get_data_mut(&mut self) -> &mut Vec<Self::O> {
@@ -295,7 +307,12 @@ pub struct List<T> {
 
 impl<T> Default for List<T> {
     fn default() -> Self {
-        List { data: Vec::new(), has_more: false, total_count: None, url: String::new() }
+        List {
+            data: Vec::new(),
+            has_more: false,
+            total_count: None,
+            url: String::new(),
+        }
     }
 }
 
@@ -312,32 +329,12 @@ pub struct ListPaginator<T, P> {
 }
 
 impl<
-        T: PaginableList + Send + DeserializeOwned + 'static,
-        P: Clone + Serialize + Send + 'static + std::fmt::Debug,
-    > ListPaginator<T, P>
+    T: PaginableList + Send + DeserializeOwned + 'static,
+    P: Clone + Serialize + Send + 'static + std::fmt::Debug,
+> ListPaginator<T, P>
 where
     P: Paginable<O = T::O>,
 {
-    /// Repeatedly queries Stripe for more data until all elements in list are fetched, using
-    /// Stripe's default page size.
-    ///
-    /// Requires `feature = "blocking"`.
-    #[cfg(feature = "blocking")]
-    pub fn get_all(self, client: &Client) -> Response<Vec<T::O>> {
-        let mut data = Vec::with_capacity(self.page.get_total_count().unwrap_or(0) as usize);
-        let mut paginator = self;
-        loop {
-            if !paginator.page.has_more() {
-                data.append(paginator.page.get_data_mut());
-                break;
-            }
-            let next_paginator = paginator.next(client)?;
-            data.append(paginator.page.get_data_mut());
-            paginator = next_paginator
-        }
-        Ok(data)
-    }
-
     /// Get all values in this List, consuming self and lazily paginating until all values are fetched.
     ///
     /// This function repeatedly queries Stripe for more data until all elements in list are fetched, using
@@ -374,7 +371,10 @@ where
         // We are going to be popping items off the end of the list, so we need to reverse it.
         self.page.get_data_mut().reverse();
 
-        Box::pin(futures_util::stream::unfold(Some((self, client.clone())), Self::unfold_stream))
+        Box::pin(futures_util::stream::unfold(
+            Some((self, client.clone())),
+            Self::unfold_stream,
+        ))
     }
 
     /// unfold a single item from the stream
@@ -385,7 +385,10 @@ where
         let (mut paginator, client) = state?; // If none, we sent the last item in the last iteration
 
         if paginator.page.get_data().len() > 1 {
-            return Some((Ok(paginator.page.get_data_mut().pop()?), Some((paginator, client))));
+            return Some((
+                Ok(paginator.page.get_data_mut().pop()?),
+                Some((paginator, client)),
+            ));
             // We have more data on this page
         }
 
@@ -426,7 +429,12 @@ where
             }
         } else {
             ok(ListPaginator {
-                page: T::new(Vec::new(), self.page.get_url(), false, self.page.get_total_count()),
+                page: T::new(
+                    Vec::new(),
+                    self.page.get_url(),
+                    false,
+                    self.page.get_total_count(),
+                ),
                 params: self.params.clone(),
             })
         }
@@ -438,11 +446,6 @@ where
     fn create_paginator(page: Response<T>, params: P) -> Response<Self> {
         use futures_util::FutureExt;
         Box::pin(page.map(|page| page.map(|page| ListPaginator { page, params })))
-    }
-
-    #[cfg(feature = "blocking")]
-    fn create_paginator(page: Response<T>, params: P) -> Response<Self> {
-        page.map(|page| ListPaginator { page, params })
     }
 }
 
@@ -461,7 +464,12 @@ pub struct RangeBounds<T> {
 
 impl<T> Default for RangeBounds<T> {
     fn default() -> Self {
-        RangeBounds { gt: None, gte: None, lt: None, lte: None }
+        RangeBounds {
+            gt: None,
+            gte: None,
+            lt: None,
+            lte: None,
+        }
     }
 }
 
@@ -482,22 +490,34 @@ impl<T> RangeQuery<T> {
 
     /// Filter results to be after a given value
     pub fn gt(value: T) -> RangeQuery<T> {
-        RangeQuery::Bounds(RangeBounds { gt: Some(value), ..Default::default() })
+        RangeQuery::Bounds(RangeBounds {
+            gt: Some(value),
+            ..Default::default()
+        })
     }
 
     /// Filter results to be after or equal to a given value
     pub fn gte(value: T) -> RangeQuery<T> {
-        RangeQuery::Bounds(RangeBounds { gte: Some(value), ..Default::default() })
+        RangeQuery::Bounds(RangeBounds {
+            gte: Some(value),
+            ..Default::default()
+        })
     }
 
     /// Filter results to be before to a given value
     pub fn lt(value: T) -> RangeQuery<T> {
-        RangeQuery::Bounds(RangeBounds { lt: Some(value), ..Default::default() })
+        RangeQuery::Bounds(RangeBounds {
+            lt: Some(value),
+            ..Default::default()
+        })
     }
 
     /// Filter results to be before or equal to a given value
     pub fn lte(value: T) -> RangeQuery<T> {
-        RangeQuery::Bounds(RangeBounds { lte: Some(value), ..Default::default() })
+        RangeQuery::Bounds(RangeBounds {
+            lte: Some(value),
+            ..Default::default()
+        })
     }
 }
 
@@ -558,7 +578,9 @@ mod tests {
         let client = Client::from_url(&*server.url("/"), "fake_key");
 
         let next_item = server.mock(|when, then| {
-            when.method(GET).path("/v1/customers").query_param("starting_after", "cus_1");
+            when.method(GET)
+                .path("/v1/customers")
+                .query_param("starting_after", "cus_1");
             then.status(200).body(
                 r#"{"object": "list", "data": [{
                 "id": "cus_2",
@@ -599,7 +621,10 @@ mod tests {
         });
 
         let params = ListCustomers::new();
-        let res = Customer::list(&client, &params).await.unwrap().paginate(params);
+        let res = Customer::list(&client, &params)
+            .await
+            .unwrap()
+            .paginate(params);
 
         println!("{:?}", res);
 
@@ -609,86 +634,6 @@ mod tests {
 
         first_item.assert_hits_async(1).await;
         next_item.assert_hits_async(1).await;
-    }
-
-    #[cfg(feature = "blocking")]
-    #[test]
-    fn get_all() {
-        use httpmock::Method::GET;
-        use httpmock::MockServer;
-
-        use crate::Client;
-        use crate::{Customer, ListCustomers};
-
-        // Start a lightweight mock server.
-        let server = MockServer::start();
-
-        let client = Client::from_url(&*server.url("/"), "fake_key");
-
-        let next_item = server.mock(|when, then| {
-            when.method(GET).path("/v1/customers").query_param("starting_after", "cus_2");
-            then.status(200).body(
-                r#"{"object": "list", "data": [{
-                "id": "cus_2",
-                "object": "customer",
-                "balance": 0,
-                "created": 1649316733,
-                "currency": "gbp",
-                "delinquent": false,
-                "email": null,
-                "invoice_prefix": "4AF7482",
-                "invoice_settings": {},
-                "livemode": false,
-                "metadata": {},
-                "preferred_locales": [],
-                "tax_exempt": "none"
-              }], "has_more": false, "url": "/v1/customers"}"#,
-            );
-        });
-
-        let first_item = server.mock(|when, then| {
-            when.method(GET).path("/v1/customers");
-            then.status(200).body(
-                r#"{"object": "list", "data": [{
-                "id": "cus_1",
-                "object": "customer",
-                "balance": 0,
-                "created": 1649316732,
-                "currency": "gbp",
-                "delinquent": false,
-                "invoice_prefix": "4AF7482",
-                "invoice_settings": {},
-                "livemode": false,
-                "metadata": {},
-                "preferred_locales": [],
-                "tax_exempt": "none"
-              }, {
-                "id": "cus_2",
-                "object": "customer",
-                "balance": 0,
-                "created": 1649316733,
-                "currency": "gbp",
-                "delinquent": false,
-                "invoice_prefix": "4AF7482",
-                "invoice_settings": {},
-                "livemode": false,
-                "metadata": {},
-                "preferred_locales": [],
-                "tax_exempt": "none"
-              }], "has_more": true, "url": "/v1/customers"}"#,
-            );
-        });
-
-        let params = ListCustomers::new();
-        let res = Customer::list(&client, &params).unwrap().paginate(params);
-
-        let customers = res.get_all(&client).unwrap();
-
-        println!("{:?}", customers);
-
-        assert_eq!(customers.len(), 3);
-        first_item.assert_hits(1);
-        next_item.assert_hits(1);
     }
 
     #[cfg(feature = "async")]
@@ -706,7 +651,9 @@ mod tests {
         let client = Client::from_url(&*server.url("/"), "fake_key");
 
         let next_item = server.mock(|when, then| {
-            when.method(GET).path("/v1/customers").query_param("starting_after", "cus_2");
+            when.method(GET)
+                .path("/v1/customers")
+                .query_param("starting_after", "cus_2");
             then.status(200).body(
                 r#"{"object": "list", "data": [{
                 "id": "cus_2",
@@ -760,7 +707,10 @@ mod tests {
         });
 
         let params = ListCustomers::new();
-        let res = Customer::list(&client, &params).await.unwrap().paginate(params);
+        let res = Customer::list(&client, &params)
+            .await
+            .unwrap()
+            .paginate(params);
 
         let res2 = res.next(&client).await.unwrap();
 
@@ -786,7 +736,9 @@ mod tests {
         let client = Client::from_url(&*server.url("/"), "fake_key");
 
         let next_item = server.mock(|when, then| {
-            when.method(GET).path("/v1/customers").query_param("starting_after", "cus_1");
+            when.method(GET)
+                .path("/v1/customers")
+                .query_param("starting_after", "cus_1");
             then.status(200).body(
                 r#"{"object": "list", "data": [{
                 "id": "cus_2",
@@ -827,7 +779,10 @@ mod tests {
         });
 
         let params = ListCustomers::new();
-        let res = Customer::list(&client, &params).await.unwrap().paginate(params);
+        let res = Customer::list(&client, &params)
+            .await
+            .unwrap()
+            .paginate(params);
 
         let stream = res.stream(&client).collect::<Vec<_>>().await;
 
@@ -854,7 +809,9 @@ mod tests {
         let client = Client::from_url(&*server.url("/"), "fake_key");
 
         let next_item = server.mock(|when, then| {
-            when.method(GET).path("/v1/customers").query_param("starting_after", "cus_2");
+            when.method(GET)
+                .path("/v1/customers")
+                .query_param("starting_after", "cus_2");
             then.status(200).body(
                 r#"{"object": "list", "data": [{
                 "id": "cus_3",
@@ -908,7 +865,10 @@ mod tests {
         });
 
         let params = ListCustomers::default();
-        let res = Customer::list(&client, &params).await.unwrap().paginate(params);
+        let res = Customer::list(&client, &params)
+            .await
+            .unwrap()
+            .paginate(params);
 
         let stream = res.stream(&client).collect::<Vec<_>>().await;
 
