@@ -49,6 +49,20 @@ mod connector {
     }
 }
 
+// Implement conversion from hyper_util error to StripeError
+impl From<hyper_util::client::legacy::Error> for StripeError {
+    fn from(err: hyper_util::client::legacy::Error) -> Self {
+        StripeError::ClientError(format!("HTTP client error: {}", err))
+    }
+}
+
+// Implement conversion from hyper error to StripeError
+impl From<hyper::Error> for StripeError {
+    fn from(err: hyper::Error) -> Self {
+        StripeError::ClientError(format!("Hyper error: {}", err))
+    }
+}
+
 type HttpClient = HyperClient<connector::HttpsConnector<HttpConnector>, Incoming>;
 
 /// Modern HTTP client built on hyper v1 and tokio
@@ -121,7 +135,7 @@ async fn send_request(
                 req.set_body(body.clone());
 
                 // Convert and send the request
-                let hyper_req = convert_request(req).await;
+                let hyper_req = convert_request(req).await?;
                 let response = match client.request(hyper_req).await {
                     Ok(response) => response,
                     Err(err) => {
@@ -139,19 +153,19 @@ async fn send_request(
                     .and_then(|s| s.parse::<bool>().ok());
 
                 // Get response body
-                let bytes = hyper::body::to_bytes(response.into_body()).await?;
+                let body_bytes = hyper::body::to_bytes(response.into_body()).await?;
 
                 // Handle error responses
                 if !status.is_success() {
                     tries += 1;
-                    let json_deserializer = &mut serde_json::Deserializer::from_slice(&bytes);
+                    let json_deserializer = &mut serde_json::Deserializer::from_slice(&body_bytes);
                     last_error = serde_path_to_error::deserialize(json_deserializer)
                         .map(|mut e: ErrorResponse| {
                             e.error.http_status = status.as_u16();
                             StripeError::from(e.error)
                         })
                         .unwrap_or_else(|_| {
-                            StripeError::Http(format!("HTTP error: {}", status))
+                            StripeError::ClientError(format!("HTTP error: {}", status))
                         });
                     
                     last_status = Some(status);
@@ -159,30 +173,48 @@ async fn send_request(
                     continue;
                 }
 
-                return Ok(bytes);
+                return Ok(body_bytes);
             }
         }
     }
 }
 
 /// Convert an http_types::Request to a hyper v1 compatible request
-async fn convert_request(mut request: Request) -> HttpRequest<Incoming> {
-    let body = request
+async fn convert_request(mut request: Request) -> Result<HttpRequest<Incoming>, StripeError> {
+    let body_bytes = request
         .body_bytes()
-        .await
-        .expect("We know the data is a valid bytes object.");
+        .await?;
     
-    // First convert to an http::Request with a dummy body
-    let req: HttpRequest<()> = request.into();
+    // Manually convert from http_types::Request to http::Request
+    let method = http::Method::from_bytes(request.method().to_string().as_bytes())
+        .map_err(|e| StripeError::ClientError(format!("Invalid method: {}", e)))?;
     
-    // Extract parts and rebuild with correct body
-    let (parts, _) = req.into_parts();
-    let bytes = Bytes::from(body);
+    let uri = http::Uri::try_from(request.url().as_str())
+        .map_err(|e| StripeError::ClientError(format!("Invalid URI: {}", e)))?;
     
-    // Create the incoming body
-    let body = Incoming::from(bytes);
+    let mut builder = HttpRequest::builder()
+        .method(method)
+        .uri(uri);
     
-    HttpRequest::from_parts(parts, body)
+    // Copy headers
+    for (name, values) in request.iter() {
+        for value in values {
+            let header_name = http::HeaderName::from_bytes(name.as_str().as_bytes())
+                .map_err(|e| StripeError::ClientError(format!("Invalid header name: {}", e)))?;
+            
+            let header_value = http::HeaderValue::from_str(value.as_str())
+                .map_err(|e| StripeError::ClientError(format!("Invalid header value: {}", e)))?;
+            
+            builder = builder.header(header_name, header_value);
+        }
+    }
+    
+    // Create request with properly converted body
+    let request = builder
+        .body(Incoming::from(body_bytes))
+        .map_err(|e| StripeError::ClientError(format!("Failed to build request: {}", e)))?;
+    
+    Ok(request)
 }
 
 #[cfg(test)]
@@ -197,13 +229,16 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn test_client_request() {
-        // This test would normally use httpmock, but is simplified here
-        let client = StripeHttpClient::new();
+    async fn test_convert_request() {
+        // Create a simple request
         let request = Request::get(Url::parse("https://example.com").unwrap());
         
-        // Just test that the conversion works without error
-        let hyper_req = convert_request(request).await;
+        // Test that the conversion works without error
+        let result = convert_request(request).await;
+        assert!(result.is_ok());
+        
+        let hyper_req = result.unwrap();
         assert_eq!(hyper_req.method(), "GET");
+        assert_eq!(hyper_req.uri().to_string(), "https://example.com/");
     }
 }

@@ -9,5 +9,5 @@ pub use stripe_client::StripeClient as Client;
 // Re-export helpers for internal use
 
 pub(crate) mod config {
-    pub(crate) use http_client::{err, ok};
+    pub(crate) use super::http_client::{err, ok};
 }

@@ -2,7 +2,7 @@ use http_types::{Body, Method, Request, Url};
 use serde::{de::DeserializeOwned, Serialize};
 
 use crate::stripe::{
-    error::{StripeError},
+    error::StripeError,
     params::AppInfo,
     AccountId, ApplicationId, Headers,
 };
@@ -165,7 +165,7 @@ impl StripeClient {
 
         let mut params_buffer = Vec::new();
         let qs_ser = &mut serde_qs::Serializer::new(&mut params_buffer);
-        serde_path_to_error::serialize(&params, qs_ser).map_err(StripeError::from)?;
+        serde_path_to_error::serialize(&params, qs_ser).map_err(StripeError::QueryStringSerialize)?;
 
         let params = std::str::from_utf8(params_buffer.as_slice())
             .expect("Unable to extract string from params_buffer")
