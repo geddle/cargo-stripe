@@ -5,8 +5,8 @@ use std::fs;
 use std::io::{self, Write};
 use std::path::{Path, PathBuf};
 
-/// Find the src directory of the target project
-pub fn find_src_directory(target_dir: Option<&Path>) -> Result<PathBuf> {
+/// Find the project root directory (where Cargo.toml is located)
+pub fn find_project_root(target_dir: Option<&Path>) -> Result<PathBuf> {
     let current_dir = match target_dir {
         Some(dir) => dir.to_path_buf(),
         None => env::current_dir()?,
@@ -15,36 +15,43 @@ pub fn find_src_directory(target_dir: Option<&Path>) -> Result<PathBuf> {
     // Check if we're in a Rust project root (contains Cargo.toml)
     let cargo_path = current_dir.join("Cargo.toml");
     if cargo_path.exists() {
-        // We're in a project root, so src is a direct subdirectory
-        let src_path = current_dir.join("src");
-        if src_path.exists() && src_path.is_dir() {
-            return Ok(src_path);
-        }
+        return Ok(current_dir);
     }
 
-    // Check if we're already in a src directory
-    if current_dir.ends_with("src")
-        && current_dir
-            .parent()
-            .is_some_and(|p| p.join("Cargo.toml").exists())
-    {
-        return Ok(current_dir);
+    // Check if we're in a src directory
+    if current_dir.ends_with("src") {
+        if let Some(parent) = current_dir.parent() {
+            if parent.join("Cargo.toml").exists() {
+                return Ok(parent.to_path_buf());
+            }
+        }
     }
 
     // Check if we're in a subdirectory of a Rust project
     let mut path = current_dir.clone();
     while let Some(parent) = path.parent() {
         if parent.join("Cargo.toml").exists() {
-            let src_path = parent.join("src");
-            if src_path.exists() && src_path.is_dir() {
-                return Ok(src_path);
-            }
+            return Ok(parent.to_path_buf());
         }
         path = parent.to_path_buf();
     }
 
     Err(anyhow!(
         "Not in a Rust project. Make sure you're in a directory with a Cargo.toml file."
+    ))
+}
+
+/// Find the src directory of the target project
+pub fn find_src_directory(target_dir: Option<&Path>) -> Result<PathBuf> {
+    let project_root = find_project_root(target_dir)?;
+    let src_path = project_root.join("src");
+    
+    if src_path.exists() && src_path.is_dir() {
+        return Ok(src_path);
+    }
+    
+    Err(anyhow!(
+        "The project doesn't have a src directory. Make sure it's a valid Rust project."
     ))
 }
 
