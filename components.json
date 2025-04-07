@@ -1,0 +1,194 @@
+{
+  "components": {
+    "account": {
+      "extension_file": "account_ext",
+      "generated_files": [
+        "account",
+        "account_link",
+        "account_session",
+        "account_application_authorized",
+        "account_application_deauthorized",
+        "account_external_account_created",
+        "account_external_account_deleted",
+        "account_external_account_updated",
+        "account_updated"
+      ]
+    },
+    "balance": {
+      "extension_file": "balance_ext",
+      "generated_files": [
+        "balance",
+        "balance_amount_by_source_type",
+        "balance_available"
+      ]
+    },
+    "balance_transaction": {
+      "extension_file": "balance_transaction_ext",
+      "generated_files": [
+        "balance_transaction"
+      ]
+    },
+    "bank_account": {
+      "extension_file": "bank_account_ext",
+      "generated_files": [
+        "bank_account"
+      ]
+    },
+    "card": {
+      "extension_file": "card",
+      "generated_files": [
+        "card"
+      ]
+    },
+    "charge": {
+      "extension_file": "charge_ext",
+      "generated_files": [
+        "charge",
+        "charge_captured",
+        "charge_expired",
+        "charge_failed",
+        "charge_pending", 
+        "charge_refunded",
+        "charge_succeeded",
+        "charge_updated"
+      ]
+    },
+    "checkout_session": {
+      "extension_file": "checkout_session_ext",
+      "generated_files": [
+        "checkout_session",
+        "checkout_session_async_payment_failed",
+        "checkout_session_async_payment_succeeded",
+        "checkout_session_completed",
+        "checkout_session_expired"
+      ]
+    },
+    "credit_note": {
+      "extension_file": "credit_note_ext",
+      "generated_files": [
+        "credit_note",
+        "credit_note_created",
+        "credit_note_updated",
+        "credit_note_voided"
+      ]
+    },
+    "currency": {
+      "extension_file": "currency",
+      "generated_files": []
+    },
+    "customer": {
+      "extension_file": "customer_ext",
+      "generated_files": [
+        "customer",
+        "customer_created",
+        "customer_deleted",
+        "customer_updated",
+        "customer_discount_created",
+        "customer_discount_deleted",
+        "customer_discount_updated",
+        "customer_source_created",
+        "customer_source_deleted",
+        "customer_source_expiring",
+        "customer_source_updated",
+        "customer_subscription_created",
+        "customer_subscription_deleted",
+        "customer_subscription_updated",
+        "customer_tax_id_created",
+        "customer_tax_id_deleted",
+        "customer_tax_id_updated"
+      ]
+    },
+    "customer_balance_transaction": {
+      "extension_file": "customer_balance_transaction_ext",
+      "generated_files": [
+        "customer_balance_transaction"
+      ]
+    },
+    "invoice": {
+      "extension_file": "invoice_ext",
+      "generated_files": [
+        "invoice",
+        "invoice_created",
+        "invoice_deleted",
+        "invoice_finalized",
+        "invoice_paid",
+        "invoice_payment_succeeded",
+        "invoice_sent",
+        "invoice_updated",
+        "invoice_voided",
+        "invoice_upcoming"
+      ]
+    },
+    "payment_intent": {
+      "extension_file": "payment_intent_ext",
+      "generated_files": [
+        "payment_intent",
+        "payment_intent_amount_capturable_updated",
+        "payment_intent_canceled",
+        "payment_intent_created",
+        "payment_intent_partially_funded",
+        "payment_intent_payment_failed",
+        "payment_intent_processing",
+        "payment_intent_requires_action",
+        "payment_intent_succeeded"
+      ]
+    },
+    "payment_method": {
+      "extension_file": "payment_method_ext",
+      "generated_files": [
+        "payment_method",
+        "payment_method_attached",
+        "payment_method_detached",
+        "payment_method_updated",
+        "payment_method_card",
+        "payment_method_sepa_debit",
+        "payment_method_bacs_debit"
+      ]
+    },
+    "payment_source": {
+      "extension_file": "payment_source",
+      "generated_files": []
+    },
+    "product": {
+      "extension_file": "product_ext",
+      "generated_files": [
+        "product",
+        "product_created",
+        "product_deleted",
+        "product_updated"
+      ]
+    },
+    "price": {
+      "extension_file": "price_ext",
+      "generated_files": [
+        "price",
+        "price_created",
+        "price_deleted",
+        "price_updated"
+      ]
+    },
+    "subscription": {
+      "extension_file": "subscription_ext",
+      "generated_files": [
+        "subscription",
+        "subscription_schedule",
+        "subscription_schedule_created",
+        "subscription_schedule_updated",
+        "subscription_schedule_canceled",
+        "subscription_schedule_released"
+      ]
+    },
+    "refund": {
+      "extension_file": "refund_ext",
+      "generated_files": [
+        "refund",
+        "refund_created",
+        "refund_updated"
+      ]
+    },
+    "webhook_events": {
+      "extension_file": "webhook_events",
+      "generated_files": []
+    }
+  }
+}

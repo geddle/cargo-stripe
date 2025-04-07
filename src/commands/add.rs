@@ -23,8 +23,7 @@ pub fn run(component: &str, target_dir: Option<&PathBuf>, force: bool) -> Result
     let stripe_dir = src_dir.join("stripe");
     if !stripe_dir.exists() {
         println!("Stripe SDK not initialized. Initializing first...");
-        // We can't call init::run directly here because it would create circular dependencies
-        // Instead, create the basic structure required for add command to work
+        // Create the basic structure required for add command to work
         fs::create_dir_all(&stripe_dir).context("Failed to create stripe directory")?;
         println!(
             "{} Created directory: {}",
@@ -96,15 +95,15 @@ fn add_single_component(
     let component_mapping = components::get_component_file_mapping(component)?;
     
     // Add the extension file if it exists
-    if let Some(ext_file) = component_mapping.extension_file {
-        let ext_content = components::generate_extension_file(component, &ext_file)?;
-        let ext_path = resources_dir.join(&ext_file);
+    if let Some(ext_file) = &component_mapping.extension_file {
+        let ext_content = components::generate_extension_file(component, ext_file)?;
+        let ext_path = resources_dir.join(ext_file);
         
         fs_utils::write_file(
             &ext_path,
             &ext_content,
             force,
-            &format!("stripe/resources/{}", &ext_file),
+            &format!("stripe/resources/{}", ext_file),
         )?;
         
         println!("{} Added extension file: {}", "✓".green(), ext_file);
@@ -149,7 +148,7 @@ fn add_all_components(
     
     println!("Adding all Stripe API components...");
     
-    for component in templates {
+    for component in &templates {
         match add_single_component(stripe_dir, resources_dir, generated_dir, component, force) {
             Ok(_) => {
                 println!("{} Added component: {}", "✓".green(), component);

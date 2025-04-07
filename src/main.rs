@@ -85,7 +85,7 @@ async fn main() {
             println!("{}", "Available Stripe API components:".bold());
             println!("These components include both extension files and generated resource definitions.\n");
             
-            for component in components {
+            for component in &components {
                 println!("  • {}", component);
             }
             
