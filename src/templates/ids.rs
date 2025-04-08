@@ -1,3 +1,4 @@
+#![allow(unused)]
 use smart_default::SmartDefault;
 
 macro_rules! def_id_serde_impls {

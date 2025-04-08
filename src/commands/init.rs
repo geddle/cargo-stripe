@@ -200,12 +200,8 @@ fn add_dependencies(root_dir: &Path) -> Result<()> {
         ("thiserror", "1.0", None),
         ("smart-default", "0.7", None),
         ("http-types", "2.12", None),
-        ("http", "1.3", None),
-        ("hyper", "1.6", None),
-        ("hyper-util", "0.1", None),
         ("smol_str", "0.3", None),
         ("futures-util", "0.3", None),
-        ("hyper-rustls", "0.27", None),
         ("serde_path_to_error", "0.1", None),
         ("serde_qs", "0.14", None),
     ];

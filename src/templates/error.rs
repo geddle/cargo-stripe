@@ -22,12 +22,6 @@ pub enum StripeError {
     Timeout,
 }
 
-impl From<http_types::Error> for StripeError {
-    fn from(err: http_types::Error) -> StripeError {
-        StripeError::ClientError(err.to_string())
-    }
-}
-
 /// The list of possible values for a RequestError's type.
 #[derive(Debug, PartialEq, Deserialize, Default)]
 pub enum ErrorType {
