@@ -198,11 +198,11 @@ fn add_all_components(
 
 /// Update the main lib.rs file to include the new module
 fn update_mod_rs(stripe_dir: &Path, module: &str) -> Result<()> {
-    let mod_path = stripe_dir.join("lib.rs");
+    let mod_path = stripe_dir.join("mod.rs");
 
     if !mod_path.exists() {
         return Err(anyhow!(
-            "lib.rs not found. Run 'cargo stripe init' to create core files."
+            "mod.rs not found. Run 'cargo stripe init' to create core files."
         ));
     }
 
@@ -306,8 +306,8 @@ fn update_generated_mod_rs(generated_dir: &Path, generated_files: &[String]) -> 
     Ok(())
 }
 
-/// Generate or update the resources.rs file based on added components
-fn update_resources_rs(stripe_dir: &Path, force: bool) -> Result<()> {
+/// Update the resources/mod.rs file to include all components and their re-exports
+fn update_resources_rs(stripe_dir: &Path, _force: bool) -> Result<()> {
     let resources_dir = stripe_dir.join("resources");
     if !resources_dir.exists() {
         return Err(anyhow!("Resources directory not found. This should not happen."));
@@ -332,27 +332,62 @@ fn update_resources_rs(stripe_dir: &Path, force: bool) -> Result<()> {
         }
     }
     
-    // Generate resources.rs content
-    let mut resources_content = String::from("//! Stripe API resources\n\n");
-    resources_content.push_str("// This file is auto-generated and will be overwritten when adding components\n\n");
+    // Update the resources/mod.rs file to include re-exports
+    let mut updated_mod_content = String::new();
     
-    // Re-export all modules from the resources directory
-    resources_content.push_str("pub use crate::stripe::resources::types::*;\n");
-    resources_content.push_str("pub use crate::stripe::resources::generated::*;\n\n");
-    
-    // Re-export all added components
-    for component in components {
-        resources_content.push_str(&format!("pub use crate::stripe::resources::{}::*;\n", component));
+    // First, preserve the module declarations section
+    let mut past_modules = false;
+    for line in mod_content.lines() {
+        // Keep all pub mod declarations
+        if line.starts_with("pub mod ") {
+            updated_mod_content.push_str(line);
+            updated_mod_content.push_str("\n");
+        } 
+        // Skip any existing re-export lines, we'll add them again below
+        else if line.contains("// Re-exports") || line.starts_with("pub use self::") {
+            past_modules = true;
+            continue;
+        }
+        // Keep any other content that's not a module declaration or re-export
+        else if !past_modules || !line.is_empty() {
+            updated_mod_content.push_str(line);
+            updated_mod_content.push_str("\n");
+        }
     }
     
-    // Write the resources.rs file
-    let resources_path = stripe_dir.join("resources.rs");
-    fs_utils::write_file(
-        &resources_path,
-        &resources_content,
-        force,
-        "stripe/resources.rs",
-    )?;
+    // Add a blank line before re-exports if needed
+    if !updated_mod_content.ends_with("\n\n") {
+        updated_mod_content.push_str("\n");
+    }
+    
+    // Add the re-exports section
+    updated_mod_content.push_str("// Re-exports\n");
+    
+    // Add base type re-exports
+    if mod_content.contains("pub mod types;") {
+        updated_mod_content.push_str("pub use self::types::*;\n");
+    }
+    
+    // Add generated re-exports
+    if mod_content.contains("pub mod generated;") {
+        updated_mod_content.push_str("pub use self::generated::*;\n");
+    }
+    
+    // Re-export all components
+    for component in components {
+        updated_mod_content.push_str(&format!("pub use self::{}::*;\n", component));
+    }
+    
+    // Write the updated mod.rs file
+    std::fs::write(&mod_path, updated_mod_content).context("Failed to update resources/mod.rs")?;
+    println!("{} Updated: {} with re-exports", "✓".green(), mod_path.display());
+    
+    // Make sure the 'resources.rs' file doesn't exist to prevent conflicts
+    let resources_rs_path = stripe_dir.join("resources.rs");
+    if resources_rs_path.exists() {
+        std::fs::remove_file(&resources_rs_path).context("Failed to remove resources.rs")?;
+        println!("{} Removed: {} to prevent module conflicts", "✓".green(), resources_rs_path.display());
+    }
     
     Ok(())
 }

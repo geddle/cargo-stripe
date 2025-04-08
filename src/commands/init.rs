@@ -124,14 +124,31 @@ fn write_core_files(
         )?;
     }
 
-    // Create resources/mod.rs - Initial module declarations
-    let resources_mod_content = "//! Stripe API resources\n\npub mod types;\npub use types::*;";
+    // Create resources/mod.rs - Initial module declarations with re-exports
+    let resources_mod_content = "//! Stripe API resources\n\n\
+        pub mod types;\n\
+        \n\
+        // Re-exports\n\
+        pub use self::types::*;\n";
+    
     fs_utils::write_file(
         &resources_dir.join("mod.rs"),
         resources_mod_content,
         force,
         "stripe/resources/mod.rs",
     )?;
+    
+    // Check if resources.rs exists and remove it to prevent conflicts
+    let resources_rs_path = stripe_dir.join("resources.rs");
+    if resources_rs_path.exists() {
+        std::fs::remove_file(&resources_rs_path)
+            .context("Failed to remove conflicting resources.rs file")?;
+        println!(
+            "{} Removed conflicting file: {}",
+            "✓".green(),
+            resources_rs_path.display()
+        );
+    }
 
     // Create client files
 
