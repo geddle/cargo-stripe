@@ -1,6 +1,6 @@
 use std::time::Duration;
 
-use http::StatusCode;
+use reqwest::StatusCode;
 
 /// Defines different strategies for making API requests with retry logic
 #[derive(Clone, Debug)]
@@ -36,7 +36,6 @@ impl RequestStrategy {
             (RequestStrategy::Once | RequestStrategy::Idempotent(_), _, 0) => Outcome::Continue(None),
 
             // Requests with client errors usually cannot be solved with retries
-            // see: https://stripe.com/docs/error-handling#content-errors
             (_, Some(c), _) if c.is_client_error() => Outcome::Stop,
 
             // Retry strategies should retry up to their max number of times
@@ -74,7 +73,7 @@ impl RequestStrategy {
 
 /// Calculate exponential backoff duration
 fn calculate_backoff(retry_count: u32) -> Duration {
-    Duration::from_secs(2_u64.pow(retry_count))
+    Duration::from_secs(2_u64.saturating_pow(retry_count))
 }
 
 /// The outcome of testing a request strategy

@@ -22,13 +22,6 @@ pub enum StripeError {
     Timeout,
 }
 
-#[cfg(feature = "hyper")]
-impl From<hyper::Error> for StripeError {
-    fn from(err: hyper::Error) -> StripeError {
-        StripeError::ClientError(err.to_string())
-    }
-}
-
 impl From<http_types::Error> for StripeError {
     fn from(err: http_types::Error) -> StripeError {
         StripeError::ClientError(err.to_string())
